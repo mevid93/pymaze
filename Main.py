@@ -2,16 +2,16 @@
 Created on 4 Mar 2016
 
 @author: Martin Vidjeskog
-@version: 0.0.1
+@version: 0.0.2
 '''
 
 
 import sys
 from PyQt4 import QtGui
-from GraafinenKayttoliittyma import Kayttoliittyma
+from GraphicalUI import GraphUI
 
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
-    ohjelmaruutu = Kayttoliittyma()
-    ohjelmaruutu.naytaIkkuna()
+    window = GraphUI()
+    window.showWindow()
