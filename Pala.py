@@ -28,7 +28,6 @@ class Pala(object):
 
         
      
-        
 class MuuriPala(Pala):
     '''
     Mustan varinen muuriPala
