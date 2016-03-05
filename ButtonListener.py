@@ -1,7 +1,7 @@
 '''
 Created on 5 Mar 2016
 
-@author: Marski
+@author: Martin Vidjeskog
 '''
 
 class ButtonListener(object):
