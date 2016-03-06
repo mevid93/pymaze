@@ -26,7 +26,7 @@ class GraphUI(QtGui.QWidget):
         p = self.palette()
         p.setColor(self.backgroundRole(), QtGui.QColor("#808080"))
         self.setPalette(p)
-        self.setWindowTitle("Labyrintti V.0.0.4")
+        self.setWindowTitle("Labyrintti V.0.0.6")
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
@@ -42,11 +42,36 @@ class GraphUI(QtGui.QWidget):
         self.genButton.resize(200, 50)
         self.genButton.move(50, 25)
         self.genButton.clicked.connect(lambda: self.buttonClicked())
-        #exit-napin alustaminen
-        self.exitButton = QtGui.QPushButton("Exit", self)
-        self.exitButton.clicked.connect(lambda: sys.exit())
+        #Lataa-labyrintti nappi
+        self.genButton = QtGui.QPushButton("Lataa Labyrintti", self)
+        self.genButton.resize(200, 50)
+        self.genButton.move(50, 100)
+        self.genButton.clicked.connect(lambda: self.buttonClicked())
+        #Tallenna-labyrintti nappi
+        self.genButton = QtGui.QPushButton("Tallenna Labyrintti", self)
+        self.genButton.resize(200, 50)
+        self.genButton.move(50, 175)
+        self.genButton.clicked.connect(lambda: self.buttonClicked())
+        #Pelaa nappi
+        self.genButton = QtGui.QPushButton("Pelaa", self)
+        self.genButton.resize(200, 50)
+        self.genButton.move(50, 250)
+        self.genButton.clicked.connect(lambda: self.buttonClicked())
+        #Demoratkaisu nappi
+        self.genButton = QtGui.QPushButton("Luovuta ja anna ratkaisu", self)
+        self.genButton.resize(200, 50)
+        self.genButton.move(50, 325)
+        self.genButton.clicked.connect(lambda: self.buttonClicked())
+        #tietoja-nappi
+        self.exitButton = QtGui.QPushButton("Tietoja ohjelmasta", self)
+        self.exitButton.clicked.connect(lambda: self.buttonClicked())
         self.exitButton.resize(200, 50)
-        self.exitButton.move(50, 476)   
+        self.exitButton.move(50, 401)
+        #exit-napin alustaminen
+        self.exitButton = QtGui.QPushButton("Lopeta", self)
+        self.exitButton.clicked.connect(lambda: self.buttonClicked())
+        self.exitButton.resize(200, 50)
+        self.exitButton.move(50, 476)
         
     def showWindow(self):
         app = QtGui.QApplication(sys.argv)
@@ -78,5 +103,23 @@ class GraphUI(QtGui.QWidget):
             self.Labyrintti = KaksiDLabyrintti(20, 20)
             self.tila = 1
             self.update()
-
+        if(sender.text() == "Tietoja ohjelmasta"):
+            self.textbox.clear()
+            self.textbox.setText("Labyrintti-peli V.0.0.6\n")
+            self.textbox.append("Ohjelma on tehty Aalto-yliopiston kurssin Ohjelmoinnin peruskurssi Y2 suorittamiseksi.")
+            self.textbox.append("Ohjelman lahdekoodi on vapaasti saatavissa GitHubista.")
+            self.textbox.append("GitHub:  https://github.com/mevid93/PythonY2Labyrintti.git")
+            self.textbox.append("Ohjelmoija: Martin Vidjeskog")
+            self.textbox.append("Kevat 2016")
+        if(sender.text() == "Lopeta"):
+            sys.exit()
+            
+            
+            
+            
+            
+            
+            
+            
+            
         

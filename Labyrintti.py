@@ -6,7 +6,6 @@ Created on 5 Mar 2016
 
 
 import LuontiAlgoritmit
-from Pala import MuuriPala, KaytavaPala
 
 
 class Labyrintti(object):
@@ -38,8 +37,9 @@ class KaksiDLabyrintti(Labyrintti):
         self.lista = LuontiAlgoritmit.luo2Dlabyrintti(self.leveys, self.korkeus)
         
     def piirraPelialueeseen(self, window):
-        for y in range(self.leveys):
-            for x in range(self.korkeus):
-                self.lista[y][x].paintPala(window)
-    
+        #for y in range(self.leveys):
+            #for x in range(self.korkeus):
+                #self.lista[y][x].paintPala(window)
+        for i in self.lista:
+            i.paintPala(window)
         
