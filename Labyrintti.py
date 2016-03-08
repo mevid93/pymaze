@@ -37,9 +37,10 @@ class KaksiDLabyrintti(Labyrintti):
         self.lista = LuontiAlgoritmit.luo2Dlabyrintti(self.leveys, self.korkeus)
         
     def piirraPelialueeseen(self, window):
-        #for y in range(self.leveys):
-            #for x in range(self.korkeus):
-                #self.lista[y][x].paintPala(window)
-        for i in self.lista:
-            i.paintPala(window)
+        for y in range(self.leveys):
+            for x in range(self.korkeus):
+                if(self.lista[y][x]):
+                    self.lista[y][x].paintPala(window)
+                    #print(self.lista[y][x])
+        print(self.lista)        
         
