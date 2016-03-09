@@ -41,6 +41,4 @@ class KaksiDLabyrintti(Labyrintti):
             for x in range(self.korkeus):
                 if(self.lista[y][x]):
                     self.lista[y][x].paintPala(window)
-                    #print(self.lista[y][x])
-        print(self.lista)        
-        
+      

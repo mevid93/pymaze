@@ -27,7 +27,6 @@ def luo2Dlabyrintti(leveys, korkeus):
         maaliX = random.randint(0, leveys-1)
         maaliY = random.choice([0, korkeus-1])
     lista = recursiveBactracking(leveys, korkeus, alkuX, alkuY, maaliX, maaliY, lista, None)
-    print(lista)
     for y in range(korkeus):
         for x in range(leveys):
             if(sisaltaaSuunnat(['N'], lista[y][x])):
@@ -59,6 +58,7 @@ def luo2Dlabyrintti(leveys, korkeus):
             elif(sisaltaaSuunnat(['S', 'W', 'E'], lista[y][x])):
                 lista[y][x] = TRisteysAlasPala(pixelX, pixelY, pixelSivu, pixelSivu)
             else:
+                lista[y][x] = YlikulkuPystysuuntaPala(pixelX, pixelY, pixelSivu, pixelSivu)
                 print("Palaa ei ole!")
             pixelX += pixelSivu
         pixelX = 275
@@ -78,7 +78,6 @@ def recursiveBactracking(leveys, korkeus, x, y, maaliX, maaliY, lista, suunta):
         lista[int(y)][int(x)].append('E')
     directions = ['N', 'S', 'E', 'W']
     random.shuffle(directions, random.random)
-    print("(" + str(x) + ", " + str(y) + ")")
     if(x == maaliX and y == maaliY):
         return lista
     for i in range(0,4):

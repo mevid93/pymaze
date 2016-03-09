@@ -42,7 +42,7 @@ class VaakasuoraPala(Pala):
         painter = QtGui.QPainter()
         painter.begin(window)
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
-        painter.fillRect(self.x, self.y + self.y/4, self.w, self.h/2, QtCore.Qt.white)
+        painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
         painter.end() 
 
 
@@ -254,6 +254,7 @@ class KaannosNWPala(Pala):
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
         painter.fillRect(self.x, self.y + self.h/4, self.w/4*3, self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h/2, QtCore.Qt.white)
+        painter.end()
         
         
 class TRisteysVasemmallePala(Pala):
@@ -273,6 +274,7 @@ class TRisteysVasemmallePala(Pala):
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
         painter.fillRect(self.x, self.y + self.h/4, self.w/4*3, self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
+        painter.end()
         
         
 class TRisteysYlosPala(Pala):
@@ -292,6 +294,7 @@ class TRisteysYlosPala(Pala):
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
         painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h/2, QtCore.Qt.white)
+        painter.end()
         
         
 class TRisteysOikeallePala(Pala):
@@ -317,6 +320,7 @@ class TRisteysOikeallePala(Pala):
                 break
             leveys += 1
         painter.fillRect(self.x + self.w/4, self.y + self.h/4, leveys, self.h/2, QtCore.Qt.white)
+        painter.end()
         
         
 class TRisteysAlasPala(Pala):
@@ -343,7 +347,7 @@ class TRisteysAlasPala(Pala):
             korkeus += 1
         painter.fillRect(self.x+ self.w/4, self.y + self.h/4, self.w/2, korkeus, QtCore.Qt.white)
         painter.end()
-        
+
         
 class YlikulkuPystysuuntaPala(Pala):
     '''
@@ -362,7 +366,7 @@ class YlikulkuPystysuuntaPala(Pala):
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
         painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
-        painter.drawLine(self.x + self.w/4, self.y, self.x + self.w/4, self.y + self.h -1)
+        painter.drawLine(self.x + self.w/4-1, self.y, self.x + self.w/4-1, self.y + self.h -1)
         painter.drawLine(self.x + self.w/4*3, self.y, self.x + self.w/4*3, self.y + self.h -1)
         painter.end()
         
