@@ -29,7 +29,9 @@ def luo2Dlabyrintti(leveys, korkeus):
     lista = recursiveBactracking(leveys, korkeus, alkuX, alkuY, maaliX, maaliY, lista, None)
     for y in range(korkeus):
         for x in range(leveys):
-            if(sisaltaaSuunnat(['N'], lista[y][x])):
+            if(y == maaliY and x == maaliX):
+                lista[y][x] = MaaliPala(pixelX, pixelY, pixelSivu, pixelSivu)
+            elif(sisaltaaSuunnat(['N'], lista[y][x])):
                 lista[y][x] = PystysuoraAlapaatyPala(pixelX, pixelY, pixelSivu, pixelSivu)
             elif(sisaltaaSuunnat(['E'], lista[y][x])):
                 lista[y][x] = VaakasuoraVasenPaatyPala(pixelX, pixelY, pixelSivu, pixelSivu)
@@ -58,8 +60,7 @@ def luo2Dlabyrintti(leveys, korkeus):
             elif(sisaltaaSuunnat(['S', 'W', 'E'], lista[y][x])):
                 lista[y][x] = TRisteysAlasPala(pixelX, pixelY, pixelSivu, pixelSivu)
             else:
-                lista[y][x] = YlikulkuPystysuuntaPala(pixelX, pixelY, pixelSivu, pixelSivu)
-                print("Palaa ei ole!")
+                lista[y][x] = XRisteysPala(pixelX, pixelY, pixelSivu, pixelSivu)
             pixelX += pixelSivu
         pixelX = 275
         pixelY += pixelSivu

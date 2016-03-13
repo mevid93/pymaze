@@ -25,6 +25,15 @@ class Labyrintti(object):
     def piirraPelialueeseen(self, window):
         pass
     
+    def getLeveys(self):
+        return self.leveys
+    
+    def getKorkeus(self):
+        return self.korkeus
+    
+    def getPala(self, x, y):
+        return self.lista[y][x]
+    
     
 
 class KaksiDLabyrintti(Labyrintti):

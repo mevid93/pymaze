@@ -8,6 +8,7 @@ Created on 4 Mar 2016
 import sys
 from PyQt4 import QtGui
 from Labyrintti import KaksiDLabyrintti
+from Pelaaja import Hahmo
 
 
 class GraphUI(QtGui.QWidget):
@@ -16,6 +17,7 @@ class GraphUI(QtGui.QWidget):
         super(GraphUI, self).__init__()
         self.initUI()
         self.Labyrintti = None
+        self.hahmo = None
         self.tila = 0
     
     def initUI(self):
@@ -26,7 +28,7 @@ class GraphUI(QtGui.QWidget):
         p = self.palette()
         p.setColor(self.backgroundRole(), QtGui.QColor("#808080"))
         self.setPalette(p)
-        self.setWindowTitle("Labyrintti V.0.0.8")
+        self.setWindowTitle("Labyrintti V.0.0.9")
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
@@ -72,45 +74,61 @@ class GraphUI(QtGui.QWidget):
         self.exitButton.clicked.connect(lambda: self.buttonClicked())
         self.exitButton.resize(200, 50)
         self.exitButton.move(50, 476)
+
         
     def showWindow(self):
         app = QtGui.QApplication(sys.argv)
         self.show()
         sys.exit(app.exec_())
+
     
     def paintEvent(self, event):
         painter = QtGui.QPainter()
         painter.begin(self)
-        if (self.tila == 0):
+        if(self.tila == 0):
             painter.drawRect(274, 24, 501, 501)
             self.tyhjennaPelialue()
-        if (self.tila == 1):
+        if(self.tila == 1):
             self.Labyrintti.piirraPelialueeseen(self)
+        if(self.tila == 2):
+            self.Labyrintti.piirraPelialueeseen(self)
+            self.hahmo.piirraHahmo(self)
         painter.end()      
+
         
     def setTextboxText(self, string):
         self.textbox.setText(string)
+
 
     def tyhjennaPelialue(self):
         painter = QtGui.QPainter()
         painter.begin(self)
         painter.fillRect(275, 25, 500, 500, QtGui.QColor("#E0E0E0"))
         painter.end() 
+   
         
     def buttonClicked(self):
         sender = self.sender()
         if(sender.text() == "Generoi Labyrintti"):
-            self.Labyrintti = KaksiDLabyrintti(20, 20)
+            leveys = 20
+            korkeus = 20
+            self.Labyrintti = KaksiDLabyrintti(leveys, korkeus)
             self.tila = 1
             self.update()
-        if(sender.text() == "Tietoja ohjelmasta"):
+        if(sender.text() == "Tietoja ohjelmasta" and self.tila != 2):
             self.textbox.clear()
-            self.textbox.setText("Labyrintti-peli V.0.0.8\n")
+            self.textbox.setText("Labyrintti-peli V.0.0.9\n")
             self.textbox.append("Ohjelma on tehty Aalto-yliopiston kurssin Ohjelmoinnin peruskurssi Y2 suorittamiseksi.")
             self.textbox.append("Ohjelman lahdekoodi on vapaasti saatavissa GitHubista.")
             self.textbox.append("GitHub:  https://github.com/mevid93/PythonY2Labyrintti.git")
             self.textbox.append("Ohjelmoija: Martin Vidjeskog")
             self.textbox.append("Kevat 2016")
+        if(sender.text() == "Pelaa" and self.Labyrintti != None):
+            self.tila = 2
+            self.hahmo = Hahmo(self.Labyrintti.getPala(int(self.Labyrintti.getLeveys()/2)-1, int(self.Labyrintti.getKorkeus()/2)-1))
+            self.textbox.clear()
+            self.setTextboxText("Etsi reitti ulos labyrintista.")
+            self.update()
         if(sender.text() == "Lopeta"):
             sys.exit()
             

@@ -8,7 +8,7 @@ Created on 4 Mar 2016
 from PyQt4 import QtGui, QtCore
 
 
-class Pala(object):
+class SuperPala(object):
     '''
     Pala on superluokka, jonka muut alaluokkat perivat
     '''   
@@ -20,14 +20,26 @@ class Pala(object):
     
     def setLocation(self, x, y):
         self.x = x
-        self.y = y            
+        self.y = y
+        
+    def getX(self):
+        return self.x
+    
+    def getY(self):
+        return self.y
+    
+    def getW(self):
+        return self.w
+    
+    def getH(self):
+        return self.h            
         
     def paintPala(self):
         pass
 
         
      
-class VaakasuoraPala(Pala):
+class VaakasuoraPala(SuperPala):
     '''
     ---------------------------------------
     ######
@@ -46,7 +58,7 @@ class VaakasuoraPala(Pala):
         painter.end() 
 
 
-class VaakasuoraVasenPaatyPala(Pala):
+class VaakasuoraVasenPaatyPala(SuperPala):
     '''
     ---------------------------------------
     ######
@@ -71,7 +83,7 @@ class VaakasuoraVasenPaatyPala(Pala):
         painter.end()
         
         
-class VaakasuoraOikeaPaatyPala(Pala):
+class VaakasuoraOikeaPaatyPala(SuperPala):
     '''
     ---------------------------------------
     ######
@@ -90,7 +102,7 @@ class VaakasuoraOikeaPaatyPala(Pala):
         painter.end()         
 
 
-class PystysuoraPala(Pala):
+class PystysuoraPala(SuperPala):
     '''
     ---------------------------------------
     ##  ##
@@ -109,7 +121,7 @@ class PystysuoraPala(Pala):
         painter.end()
         
         
-class PystysuoraYlapaatyPala(Pala):
+class PystysuoraYlapaatyPala(SuperPala):
     '''
     ---------------------------------------
     ######
@@ -134,7 +146,7 @@ class PystysuoraYlapaatyPala(Pala):
         painter.end()
         
         
-class PystysuoraAlapaatyPala(Pala):
+class PystysuoraAlapaatyPala(SuperPala):
     '''
     ---------------------------------------
     ##  ##
@@ -153,7 +165,7 @@ class PystysuoraAlapaatyPala(Pala):
         painter.end()   
         
         
-class KaannosNEPala(Pala):
+class KaannosNEPala(SuperPala):
     '''
     ---------------------------------------
     ##  ##
@@ -179,7 +191,7 @@ class KaannosNEPala(Pala):
         painter.end()
         
         
-class KaannosSEPala(Pala):
+class KaannosSEPala(SuperPala):
     '''
     ---------------------------------------
     ######
@@ -211,7 +223,7 @@ class KaannosSEPala(Pala):
         painter.end()   
         
         
-class KaannosSWPala(Pala):
+class KaannosSWPala(SuperPala):
     '''
     ---------------------------------------
     ######
@@ -237,7 +249,7 @@ class KaannosSWPala(Pala):
         painter.end()  
         
         
-class KaannosNWPala(Pala):
+class KaannosNWPala(SuperPala):
     '''
     ---------------------------------------
     ##  ##
@@ -257,7 +269,7 @@ class KaannosNWPala(Pala):
         painter.end()
         
         
-class TRisteysVasemmallePala(Pala):
+class TRisteysVasemmallePala(SuperPala):
     '''
     ---------------------------------------
     ##  ##
@@ -277,7 +289,7 @@ class TRisteysVasemmallePala(Pala):
         painter.end()
         
         
-class TRisteysYlosPala(Pala):
+class TRisteysYlosPala(SuperPala):
     '''
     ---------------------------------------
     ##  ##
@@ -297,7 +309,7 @@ class TRisteysYlosPala(Pala):
         painter.end()
         
         
-class TRisteysOikeallePala(Pala):
+class TRisteysOikeallePala(SuperPala):
     '''
     ---------------------------------------
     ##  ##
@@ -323,7 +335,7 @@ class TRisteysOikeallePala(Pala):
         painter.end()
         
         
-class TRisteysAlasPala(Pala):
+class TRisteysAlasPala(SuperPala):
     '''
     ---------------------------------------
     ######
@@ -348,8 +360,28 @@ class TRisteysAlasPala(Pala):
         painter.fillRect(self.x+ self.w/4, self.y + self.h/4, self.w/2, korkeus, QtCore.Qt.white)
         painter.end()
 
+
+class XRisteysPala(SuperPala):
+    '''
+    ---------------------------------------
+    ##  ##
+    
+    ##  ##
+    ---------------------------------------
+    '''
+    def __init__(self, x, y, w, h):
+        super().__init__(x, y, w, h)
+    
+    def paintPala(self, window):
+        painter = QtGui.QPainter()
+        painter.begin(window)
+        painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
+        painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
+        painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
+        painter.end()
+
         
-class YlikulkuPystysuuntaPala(Pala):
+class YlikulkuPystysuuntaPala(SuperPala):
     '''
     ---------------------------------------
     ##|  |##
@@ -371,7 +403,7 @@ class YlikulkuPystysuuntaPala(Pala):
         painter.end()
         
         
-class YlikulkuVaakasuuntaPala(Pala):
+class YlikulkuVaakasuuntaPala(SuperPala):
     '''
     ---------------------------------------
     ##  ##
@@ -393,6 +425,21 @@ class YlikulkuVaakasuuntaPala(Pala):
         painter.drawLine(self.x, self.y + self.h/4*3, self.x + self.w-1, self.y + self.h/4*3)
         painter.end()
         
+
+class MaaliPala(SuperPala):
+    '''
+    ---------------------------------------
+    Vihree kuutio
+    ---------------------------------------
+    '''
+    def __init__(self, x, y, w, h):
+        super().__init__(x, y, w, h)
+    
+    def paintPala(self, window):
+        painter = QtGui.QPainter()
+        painter.begin(window)
+        painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.green)
+        painter.end()
         
         
         
