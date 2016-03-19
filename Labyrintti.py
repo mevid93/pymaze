@@ -5,7 +5,8 @@ Created on 5 Mar 2016
 '''
 
 
-import LuontiAlgoritmit
+import Luontialgoritmi1
+import Luontialgoritmi2
 
 
 class Labyrintti(object):
@@ -43,7 +44,8 @@ class KaksiDLabyrintti(Labyrintti):
         self.luoLabyrintti()
         
     def luoLabyrintti(self):
-        self.lista = LuontiAlgoritmit.luo2Dlabyrintti(self.leveys, self.korkeus)
+        #self.lista = Luontialgoritmi1.luo2Dlabyrintti(self.leveys, self.korkeus)
+        self.lista = Luontialgoritmi2.luoWeaveLabyrintti(self.leveys, self.korkeus)
         
     def piirraPelialueeseen(self, window):
         for y in range(self.leveys):

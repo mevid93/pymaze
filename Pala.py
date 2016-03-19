@@ -421,7 +421,7 @@ class YlikulkuVaakasuuntaPala(SuperPala):
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
         painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
-        painter.drawLine(self.x, self.y + self.h/4, self.x + self.w-1, self.y + self.h/4)
+        painter.drawLine(self.x, self.y + self.h/4-1, self.x + self.w-1, self.y + self.h/4-1)
         painter.drawLine(self.x, self.y + self.h/4*3, self.x + self.w-1, self.y + self.h/4*3)
         painter.end()
         
