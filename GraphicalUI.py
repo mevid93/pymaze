@@ -7,8 +7,9 @@ Created on 4 Mar 2016
 
 import sys
 from PyQt4 import QtGui
-from Labyrintti import KaksiDLabyrintti
+from Labyrintti import KaksiDLabyrintti, WeaveLabyrintti
 from Pelaaja import Hahmo
+from Tiedostonkasittelija import Tallentaja
 
 
 class GraphUI(QtGui.QWidget):
@@ -16,7 +17,7 @@ class GraphUI(QtGui.QWidget):
     def __init__(self):
         super(GraphUI, self).__init__()
         self.initUI()
-        self.Labyrintti = None
+        self.labyrintti = None
         self.hahmo = None
         self.tila = 0
     
@@ -28,7 +29,7 @@ class GraphUI(QtGui.QWidget):
         p = self.palette()
         p.setColor(self.backgroundRole(), QtGui.QColor("#808080"))
         self.setPalette(p)
-        self.setWindowTitle("Labyrintti V.0.1.0")
+        self.setWindowTitle("Labyrintti V.0.1.1")
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
@@ -45,25 +46,25 @@ class GraphUI(QtGui.QWidget):
         self.genButton.move(50, 25)
         self.genButton.clicked.connect(lambda: self.buttonClicked())
         #Lataa-labyrintti nappi
-        self.genButton = QtGui.QPushButton("Lataa Labyrintti", self)
-        self.genButton.resize(200, 50)
-        self.genButton.move(50, 100)
-        self.genButton.clicked.connect(lambda: self.buttonClicked())
+        self.loadButton = QtGui.QPushButton("Lataa Labyrintti", self)
+        self.loadButton.resize(200, 50)
+        self.loadButton.move(50, 100)
+        self.loadButton.clicked.connect(lambda: self.buttonClicked())
         #Tallenna-labyrintti nappi
-        self.genButton = QtGui.QPushButton("Tallenna Labyrintti", self)
-        self.genButton.resize(200, 50)
-        self.genButton.move(50, 175)
-        self.genButton.clicked.connect(lambda: self.buttonClicked())
+        self.saveButton = QtGui.QPushButton("Tallenna Labyrintti", self)
+        self.saveButton.resize(200, 50)
+        self.saveButton.move(50, 175)
+        self.saveButton.clicked.connect(lambda: self.buttonClicked())
         #Pelaa nappi
-        self.genButton = QtGui.QPushButton("Pelaa", self)
-        self.genButton.resize(200, 50)
-        self.genButton.move(50, 250)
-        self.genButton.clicked.connect(lambda: self.buttonClicked())
+        self.playButton = QtGui.QPushButton("Pelaa", self)
+        self.playButton.resize(200, 50)
+        self.playButton.move(50, 250)
+        self.playButton.clicked.connect(lambda: self.buttonClicked())
         #Demoratkaisu nappi
-        self.genButton = QtGui.QPushButton("Luovuta ja anna ratkaisu", self)
-        self.genButton.resize(200, 50)
-        self.genButton.move(50, 325)
-        self.genButton.clicked.connect(lambda: self.buttonClicked())
+        self.demoButton = QtGui.QPushButton("Luovuta ja anna ratkaisu", self)
+        self.demoButton.resize(200, 50)
+        self.demoButton.move(50, 325)
+        self.demoButton.clicked.connect(lambda: self.buttonClicked())
         #tietoja-nappi
         self.exitButton = QtGui.QPushButton("Tietoja ohjelmasta", self)
         self.exitButton.clicked.connect(lambda: self.buttonClicked())
@@ -89,9 +90,9 @@ class GraphUI(QtGui.QWidget):
             painter.drawRect(274, 24, 501, 501)
             self.tyhjennaPelialue()
         if(self.tila == 1):
-            self.Labyrintti.piirraPelialueeseen(self)
+            self.labyrintti.piirraPelialueeseen(self)
         if(self.tila == 2):
-            self.Labyrintti.piirraPelialueeseen(self)
+            self.labyrintti.piirraPelialueeseen(self)
             self.hahmo.piirraHahmo(self)
         painter.end()      
 
@@ -112,25 +113,29 @@ class GraphUI(QtGui.QWidget):
         if(sender.text() == "Generoi Labyrintti"):
             leveys = 20
             korkeus = 20
-            self.Labyrintti = KaksiDLabyrintti(leveys, korkeus)
+            self.labyrintti = WeaveLabyrintti(leveys, korkeus)
             self.tila = 1
             self.update()
         if(sender.text() == "Tietoja ohjelmasta" and self.tila != 2):
             self.textbox.clear()
-            self.textbox.setText("Labyrintti-peli V.0.1.0\n")
+            self.textbox.setText("Labyrintti-peli V.0.1.1\n")
             self.textbox.append("Ohjelma on tehty Aalto-yliopiston kurssin Ohjelmoinnin peruskurssi Y2 suorittamiseksi.")
             self.textbox.append("Ohjelman lahdekoodi on vapaasti saatavissa GitHubista.")
             self.textbox.append("GitHub:  https://github.com/mevid93/PythonY2Labyrintti.git")
             self.textbox.append("Ohjelmoija: Martin Vidjeskog")
             self.textbox.append("Kevat 2016")
-        if(sender.text() == "Pelaa" and self.Labyrintti != None):
+        if(sender.text() == "Pelaa" and self.labyrintti != None):
             self.tila = 2
-            self.hahmo = Hahmo(self.Labyrintti.getPala(int(self.Labyrintti.getLeveys()/2)-1, int(self.Labyrintti.getKorkeus()/2)-1))
+            self.hahmo = Hahmo(self.labyrintti.getPala(int(self.labyrintti.getLeveys()/2)-1, int(self.labyrintti.getKorkeus()/2)-1))
             self.textbox.clear()
-            self.setTextboxText("Etsi reitti ulos labyrintista.")
+            self.setTextboxText("PELI ON KAYNNISSA! Etsi reitti ulos labyrintista.")
             self.update()
         if(sender.text() == "Lopeta"):
             sys.exit()
+        if(sender.text() == "Tallenna Labyrintti" and self.tila != 2 and self.labyrintti != None):
+            tallentaja = Tallentaja(self, self.labyrintti)
+            tallentaja.tallennaLabyrintti()
+            
             
             
             
