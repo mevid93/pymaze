@@ -11,23 +11,30 @@ import PyQt4.QtGui
 
 class Tallentaja(object):
 
-    def __init__(self, window, Labyrintti):
+    def __init__(self, window, labyrintti):
         self.window = window
-        self.leveys = Labyrintti.getLeveys()
-        self.korkeus = Labyrintti.getKorkeus()
-        self.lista = Labyrintti.getPalat()
+        self.leveys = labyrintti.getLeveys()
+        self.korkeus = labyrintti.getKorkeus()
+        self.lista = labyrintti.getPalat()
+        self.tyyppi = labyrintti.getTyyppi()
         
     def tallennaLabyrintti(self):
         name = PyQt4.QtGui.QFileDialog.getSaveFileName(self.window, 'Save File', filter = '*.maze')
         if(name != '' and name != None):
             file = open(name, 'w')
-            file.write("#Leveys: " + str(self.leveys))
+            file.write("#Tyyppi: " + self.tyyppi)
             file.write("\n\n")
-            file.write("#Korkeus: " + str(self.korkeus))
+            file.write("#Labyrintin leveys: " + str(self.leveys))
+            file.write("\n\n")
+            file.write("#Labyrintin korkeus: " + str(self.korkeus))
+            file.write("\n\n")
+            file.write("#Palan leveys: " + str(self.lista[0][0].getW()))
+            file.write("\n\n")
+            file.write("#Palan korkeus: " + str(self.lista[0][0].getY()))
             file.write("\n\n")
             file.write("#Palat: \n")
             for y in range(self.korkeus):
                 for x in range(self.leveys):
-                    file.write(str(self.lista[y][x].getX()) + " " + str(self.lista[y][x].getY()) + " " + str(self.lista[y][x].getW()) + " " + str(self.lista[y][x].getH()))
+                    file.write(str(self.lista[y][x].getX()) + " " + str(self.lista[y][x].getY()) + " " + type(self.lista[y][x]).__name__)
                     file.write("\n")
             file.close()

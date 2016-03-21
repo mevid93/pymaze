@@ -25,6 +25,9 @@ class Labyrintti(object):
     
     def piirraPelialueeseen(self, window):
         pass
+
+    def getTyyppi(self):
+        pass
     
     def getLeveys(self):
         return self.leveys
@@ -54,6 +57,9 @@ class KaksiDLabyrintti(Labyrintti):
             for x in range(self.korkeus):
                 if(self.lista[y][x]):
                     self.lista[y][x].paintPala(window)
+                    
+    def getTyyppi(self):
+        return "KaksiDLabyrintti"
       
       
       
@@ -71,6 +77,9 @@ class WeaveLabyrintti(Labyrintti):
             for x in range(self.korkeus):
                 if(self.lista[y][x]):
                     self.lista[y][x].paintPala(window)
+                    
+    def getTyyppi(self):
+        return "WeaveLabyrintti"
     
     
     
