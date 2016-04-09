@@ -65,10 +65,13 @@ class KaksiDLabyrintti(Labyrintti):
       
 class WeaveLabyrintti(Labyrintti):
     
-    def __init__(self, leveys, korkeus):
+    def __init__(self, leveys, korkeus, lista = []):
         super().__init__(leveys, korkeus)
-        self.luoLabyrintti()
-        
+        if(len(lista) == 0):
+            self.luoLabyrintti()
+        else:
+            self.lista = lista
+            
     def luoLabyrintti(self):
         self.lista = Luontialgoritmi2.luoWeaveLabyrintti(self.leveys, self.korkeus)
         

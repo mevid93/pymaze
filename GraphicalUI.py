@@ -9,7 +9,7 @@ import sys
 from PyQt4 import QtGui
 from Labyrintti import KaksiDLabyrintti, WeaveLabyrintti
 from Pelaaja import Hahmo
-from Tiedostonkasittelija import Tallentaja
+from Tiedostonkasittelija import Tallentaja, Lataaja
 
 
 class GraphUI(QtGui.QWidget):
@@ -29,7 +29,7 @@ class GraphUI(QtGui.QWidget):
         p = self.palette()
         p.setColor(self.backgroundRole(), QtGui.QColor("#808080"))
         self.setPalette(p)
-        self.setWindowTitle("Labyrintti V.0.1.2")
+        self.setWindowTitle("Labyrintti V.0.1.4")
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
@@ -110,7 +110,7 @@ class GraphUI(QtGui.QWidget):
         
     def buttonClicked(self):
         sender = self.sender()
-        if(sender.text() == "Generoi Labyrintti"):
+        if(sender.text() == "Generoi Labyrintti" and self.tila != 2):
             leveys = 20
             korkeus = 20
             self.labyrintti = WeaveLabyrintti(leveys, korkeus)
@@ -118,7 +118,7 @@ class GraphUI(QtGui.QWidget):
             self.update()
         if(sender.text() == "Tietoja ohjelmasta" and self.tila != 2):
             self.textbox.clear()
-            self.textbox.setText("Labyrintti-peli V.0.1.2\n")
+            self.textbox.setText("Labyrintti-peli V.0.1.4\n")
             self.textbox.append("Ohjelma on tehty Aalto-yliopiston kurssin Ohjelmoinnin peruskurssi Y2 suorittamiseksi.")
             self.textbox.append("Ohjelman lahdekoodi on vapaasti saatavissa GitHubista.")
             self.textbox.append("GitHub:  https://github.com/mevid93/PythonY2Labyrintti.git")
@@ -128,14 +128,23 @@ class GraphUI(QtGui.QWidget):
             self.tila = 2
             self.hahmo = Hahmo(self.labyrintti.getPala(int(self.labyrintti.getLeveys()/2)-1, int(self.labyrintti.getKorkeus()/2)-1))
             self.textbox.clear()
-            self.setTextboxText("PELI ON KAYNNISSA! Etsi reitti ulos labyrintista.")
+            self.setTextboxText("PELI ON KAYNNISSA! Etsi reitti ulos labyrintista.\nVoit aina luovuttaa jos et keksi ratkaisua.")
             self.update()
         if(sender.text() == "Lopeta"):
             sys.exit()
         if(sender.text() == "Tallenna Labyrintti" and self.tila != 2 and self.labyrintti != None):
             tallentaja = Tallentaja(self, self.labyrintti)
             tallentaja.tallennaLabyrintti()
-            
+        if(sender.text() == "Lataa Labyrintti" and self.tila != 2):
+            lataaja = Lataaja(self)
+            labyrintti = lataaja.lataaLabyrintti()
+            if(labyrintti != None):
+                self.labyrintti = labyrintti
+                self.tila = 1
+                self.update()
+                self.textbox.clear()
+                self.textbox.setText("Labyrintin lataus onnistui.")
+
             
             
             
