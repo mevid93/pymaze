@@ -14,14 +14,25 @@ class Hahmo(object):
     Saa parametreina kokonaisluvut x ja y.
     '''
 
-    def __init__(self, SuperPala):
+    def __init__(self, SuperPala, x, y):
         self.pala = SuperPala
+        self.x = x
+        self.y = y
 
-    def liikutaHahmoa(self, SuperPala):
+    def liikutaHahmoa(self, SuperPala, x, y):
         self.pala = SuperPala
+        self.x = x
+        self.y = y
         
     def piirraHahmo(self, window):
         painter = QtGui.QPainter()
         painter.begin(window)
         painter.fillRect(self.pala.getX() + self.pala.getW()/4 + 1, self.pala.getY() + self.pala.getH()/4 + 1, 10, 10, QtCore.Qt.red)
-        painter.end() 
+        painter.end()
+        
+    def getSijainti(self):
+        return self.x, self.y
+    
+
+        
+    

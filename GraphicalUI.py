@@ -6,7 +6,7 @@ Created on 4 Mar 2016
 
 
 import sys
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 from Labyrintti import KaksiDLabyrintti, WeaveLabyrintti
 from Pelaaja import Hahmo
 from Tiedostonkasittelija import Tallentaja, Lataaja
@@ -76,6 +76,35 @@ class GraphUI(QtGui.QWidget):
         self.exitButton.resize(200, 50)
         self.exitButton.move(50, 476)
 
+
+    def keyPressEvent(self, e):
+        if(self.tila == 2):
+            x, y = self.hahmo.getSijainti()
+            if (e.key() == QtCore.Qt.Key_W):
+                if(y > 0):
+                    y = y - 1
+                    pala = self.labyrintti.getPala(x, y)
+                    self.hahmo.liikutaHahmoa(pala, x, y)
+                    self.update()
+            elif(e.key() == QtCore.Qt.Key_S):
+                if(y < self.labyrintti.getKorkeus()-1):
+                    y = y + 1
+                    pala = self.labyrintti.getPala(x, y)
+                    self.hahmo.liikutaHahmoa(pala, x, y)
+                    self.update()
+            elif(e.key() == QtCore.Qt.Key_A):
+                if(x > 0):
+                    x = x - 1
+                    pala = self.labyrintti.getPala(x, y)
+                    self.hahmo.liikutaHahmoa(pala, x, y)
+                    self.update()
+            elif(e.key() == QtCore.Qt.Key_D):
+                if(x < self.labyrintti.getLeveys()-1):
+                    x = x + 1
+                    pala = self.labyrintti.getPala(x, y)
+                    self.hahmo.liikutaHahmoa(pala, x, y)
+                    self.update()
+                
         
     def showWindow(self):
         app = QtGui.QApplication(sys.argv)
@@ -126,7 +155,9 @@ class GraphUI(QtGui.QWidget):
             self.textbox.append("Kevat 2016")
         if(sender.text() == "Pelaa" and self.labyrintti != None):
             self.tila = 2
-            self.hahmo = Hahmo(self.labyrintti.getPala(int(self.labyrintti.getLeveys()/2)-1, int(self.labyrintti.getKorkeus()/2)-1))
+            x = int(self.labyrintti.getLeveys()/2)-1
+            y = int(self.labyrintti.getKorkeus()/2)-1
+            self.hahmo = Hahmo(self.labyrintti.getPala(x, y), x, y)
             self.textbox.clear()
             self.setTextboxText("PELI ON KAYNNISSA! Etsi reitti ulos labyrintista.\nVoit aina luovuttaa jos et keksi ratkaisua.")
             self.update()
@@ -144,6 +175,8 @@ class GraphUI(QtGui.QWidget):
                 self.update()
                 self.textbox.clear()
                 self.textbox.setText("Labyrintin lataus onnistui.")
+                
+                
 
             
             
