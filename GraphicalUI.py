@@ -29,7 +29,7 @@ class GraphUI(QtGui.QWidget):
         p = self.palette()
         p.setColor(self.backgroundRole(), QtGui.QColor("#808080"))
         self.setPalette(p)
-        self.setWindowTitle("Labyrintti V.0.1.6")
+        self.setWindowTitle("Labyrintti V.0.1.7")
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
@@ -81,25 +81,25 @@ class GraphUI(QtGui.QWidget):
         if(self.tila == 2):
             x, y = self.hahmo.getSijainti()
             if (e.key() == QtCore.Qt.Key_W):
-                if(y > 0):
+                if(y > 0 and self.labyrintti.getPala(x, y).voiLiikkuaYlos()):
                     y = y - 1
                     pala = self.labyrintti.getPala(x, y)
                     self.hahmo.liikutaHahmoa(pala, x, y)
                     self.update()
             elif(e.key() == QtCore.Qt.Key_S):
-                if(y < self.labyrintti.getKorkeus()-1):
+                if(y < self.labyrintti.getKorkeus()-1 and self.labyrintti.getPala(x, y).voiLiikkuaAlas()):
                     y = y + 1
                     pala = self.labyrintti.getPala(x, y)
                     self.hahmo.liikutaHahmoa(pala, x, y)
                     self.update()
             elif(e.key() == QtCore.Qt.Key_A):
-                if(x > 0):
+                if(x > 0 and self.labyrintti.getPala(x, y).voiLiikkuaVasemmalle()):
                     x = x - 1
                     pala = self.labyrintti.getPala(x, y)
                     self.hahmo.liikutaHahmoa(pala, x, y)
                     self.update()
             elif(e.key() == QtCore.Qt.Key_D):
-                if(x < self.labyrintti.getLeveys()-1):
+                if(x < self.labyrintti.getLeveys()-1 and self.labyrintti.getPala(x, y).voiLiikkuaOikealle()):
                     x = x + 1
                     pala = self.labyrintti.getPala(x, y)
                     self.hahmo.liikutaHahmoa(pala, x, y)
@@ -147,7 +147,7 @@ class GraphUI(QtGui.QWidget):
             self.update()
         if(sender.text() == "Tietoja ohjelmasta" and self.tila != 2):
             self.textbox.clear()
-            self.textbox.setText("Labyrintti-peli V.0.1.6\n")
+            self.textbox.setText("Labyrintti-peli V.0.1.7\n")
             self.textbox.append("Ohjelma on tehty Aalto-yliopiston kurssin Ohjelmoinnin peruskurssi Y2 suorittamiseksi.")
             self.textbox.append("Ohjelman lahdekoodi on vapaasti saatavissa GitHubista.")
             self.textbox.append("GitHub:  https://github.com/mevid93/PythonY2Labyrintti.git")

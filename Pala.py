@@ -25,6 +25,18 @@ class SuperPala(object):
     def getX(self):
         return self.x
     
+    def voiLiikkuaYlos(self):
+        pass
+    
+    def voiLiikkuaAlas(self):
+        pass
+    
+    def voiLiikkuaOikealle(self):
+        pass
+    
+    def voiLiikkuaVasemmalle(self):
+        pass
+    
     def getY(self):
         return self.y
     
@@ -57,6 +69,17 @@ class VaakasuoraPala(SuperPala):
         painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
         painter.end() 
 
+    def voiLiikkuaYlos(self):
+        return False
+    
+    def voiLiikkuaAlas(self):
+        return False
+    
+    def voiLiikkuaOikealle(self):
+        return True
+    
+    def voiLiikkuaVasemmalle(self):
+        return True
 
 class VaakasuoraVasenPaatyPala(SuperPala):
     '''
@@ -82,6 +105,18 @@ class VaakasuoraVasenPaatyPala(SuperPala):
         painter.fillRect(self.x + self.w/4, self.y + self.h/4, leveys, self.h/2, QtCore.Qt.white)
         painter.end()
         
+    def voiLiikkuaYlos(self):
+        return False
+    
+    def voiLiikkuaAlas(self):
+        return False
+    
+    def voiLiikkuaOikealle(self):
+        return True
+    
+    def voiLiikkuaVasemmalle(self):
+        return False
+        
         
 class VaakasuoraOikeaPaatyPala(SuperPala):
     '''
@@ -101,6 +136,17 @@ class VaakasuoraOikeaPaatyPala(SuperPala):
         painter.fillRect(self.x, self.y + self.h/4, self.w/4*3, self.h/2, QtCore.Qt.white)
         painter.end()         
 
+    def voiLiikkuaYlos(self):
+        return False
+    
+    def voiLiikkuaAlas(self):
+        return False
+    
+    def voiLiikkuaOikealle(self):
+        return False
+    
+    def voiLiikkuaVasemmalle(self):
+        return True
 
 class PystysuoraPala(SuperPala):
     '''
@@ -120,6 +166,17 @@ class PystysuoraPala(SuperPala):
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
         painter.end()
         
+    def voiLiikkuaYlos(self):
+        return True
+    
+    def voiLiikkuaAlas(self):
+        return True
+    
+    def voiLiikkuaOikealle(self):
+        return False
+    
+    def voiLiikkuaVasemmalle(self):
+        return False       
         
 class PystysuoraYlapaatyPala(SuperPala):
     '''
@@ -145,6 +202,17 @@ class PystysuoraYlapaatyPala(SuperPala):
         painter.fillRect(self.x+ self.w/4, self.y + self.h/4, self.w/2, korkeus, QtCore.Qt.white)
         painter.end()
         
+    def voiLiikkuaYlos(self):
+        return False
+    
+    def voiLiikkuaAlas(self):
+        return True
+    
+    def voiLiikkuaOikealle(self):
+        return False
+    
+    def voiLiikkuaVasemmalle(self):
+        return False       
         
 class PystysuoraAlapaatyPala(SuperPala):
     '''
@@ -162,7 +230,19 @@ class PystysuoraAlapaatyPala(SuperPala):
         painter.begin(window)
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h/4*3, QtCore.Qt.white)
-        painter.end()   
+        painter.end()  
+        
+    def voiLiikkuaYlos(self):
+        return True
+    
+    def voiLiikkuaAlas(self):
+        return False
+    
+    def voiLiikkuaOikealle(self):
+        return False
+    
+    def voiLiikkuaVasemmalle(self):
+        return False
         
         
 class KaannosNEPala(SuperPala):
@@ -189,6 +269,18 @@ class KaannosNEPala(SuperPala):
             leveys += 1
         painter.fillRect(self.x + self.w/4, self.y + self.h/4, leveys, self.h/2, QtCore.Qt.white)
         painter.end()
+        
+    def voiLiikkuaYlos(self):
+        return True
+    
+    def voiLiikkuaAlas(self):
+        return False
+    
+    def voiLiikkuaOikealle(self):
+        return True
+    
+    def voiLiikkuaVasemmalle(self):
+        return False
         
         
 class KaannosSEPala(SuperPala):
@@ -220,7 +312,19 @@ class KaannosSEPala(SuperPala):
                 break
             alkuY += 1
         painter.fillRect(self.x + self.w/4, alkuY, self.w/2, self.h/2, QtCore.Qt.white)
-        painter.end()   
+        painter.end()  
+        
+    def voiLiikkuaYlos(self):
+        return False
+    
+    def voiLiikkuaAlas(self):
+        return True
+    
+    def voiLiikkuaOikealle(self):
+        return True
+    
+    def voiLiikkuaVasemmalle(self):
+        return False 
         
         
 class KaannosSWPala(SuperPala):
@@ -248,6 +352,18 @@ class KaannosSWPala(SuperPala):
         painter.fillRect(self.x + self.w/4, alkuY, self.w/2, self.h/2, QtCore.Qt.white)
         painter.end()  
         
+    def voiLiikkuaYlos(self):
+        return False
+    
+    def voiLiikkuaAlas(self):
+        return True
+    
+    def voiLiikkuaOikealle(self):
+        return False
+    
+    def voiLiikkuaVasemmalle(self):
+        return True
+        
         
 class KaannosNWPala(SuperPala):
     '''
@@ -267,6 +383,18 @@ class KaannosNWPala(SuperPala):
         painter.fillRect(self.x, self.y + self.h/4, self.w/4*3, self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h/2, QtCore.Qt.white)
         painter.end()
+        
+    def voiLiikkuaYlos(self):
+        return True
+    
+    def voiLiikkuaAlas(self):
+        return False
+    
+    def voiLiikkuaOikealle(self):
+        return False
+    
+    def voiLiikkuaVasemmalle(self):
+        return True
         
         
 class TRisteysVasemmallePala(SuperPala):
@@ -288,6 +416,18 @@ class TRisteysVasemmallePala(SuperPala):
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
         painter.end()
         
+    def voiLiikkuaYlos(self):
+        return True
+    
+    def voiLiikkuaAlas(self):
+        return True
+    
+    def voiLiikkuaOikealle(self):
+        return False
+    
+    def voiLiikkuaVasemmalle(self):
+        return True
+        
         
 class TRisteysYlosPala(SuperPala):
     '''
@@ -308,6 +448,17 @@ class TRisteysYlosPala(SuperPala):
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h/2, QtCore.Qt.white)
         painter.end()
         
+    def voiLiikkuaYlos(self):
+        return True
+    
+    def voiLiikkuaAlas(self):
+        return False
+    
+    def voiLiikkuaOikealle(self):
+        return True
+    
+    def voiLiikkuaVasemmalle(self):
+        return True
         
 class TRisteysOikeallePala(SuperPala):
     '''
@@ -334,6 +485,18 @@ class TRisteysOikeallePala(SuperPala):
         painter.fillRect(self.x + self.w/4, self.y + self.h/4, leveys, self.h/2, QtCore.Qt.white)
         painter.end()
         
+    def voiLiikkuaYlos(self):
+        return True
+    
+    def voiLiikkuaAlas(self):
+        return True
+    
+    def voiLiikkuaOikealle(self):
+        return True
+    
+    def voiLiikkuaVasemmalle(self):
+        return False
+        
         
 class TRisteysAlasPala(SuperPala):
     '''
@@ -359,6 +522,18 @@ class TRisteysAlasPala(SuperPala):
             korkeus += 1
         painter.fillRect(self.x+ self.w/4, self.y + self.h/4, self.w/2, korkeus, QtCore.Qt.white)
         painter.end()
+        
+    def voiLiikkuaYlos(self):
+        return False
+    
+    def voiLiikkuaAlas(self):
+        return True
+    
+    def voiLiikkuaOikealle(self):
+        return True
+    
+    def voiLiikkuaVasemmalle(self):
+        return True
 
 
 class XRisteysPala(SuperPala):
@@ -379,6 +554,18 @@ class XRisteysPala(SuperPala):
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
         painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
         painter.end()
+        
+    def voiLiikkuaYlos(self):
+        return True
+    
+    def voiLiikkuaAlas(self):
+        return True
+    
+    def voiLiikkuaOikealle(self):
+        return True
+    
+    def voiLiikkuaVasemmalle(self):
+        return True
 
         
 class YlikulkuPystysuuntaPala(SuperPala):
@@ -401,6 +588,18 @@ class YlikulkuPystysuuntaPala(SuperPala):
         painter.drawLine(self.x + self.w/4-1, self.y, self.x + self.w/4-1, self.y + self.h -1)
         painter.drawLine(self.x + self.w/4*3, self.y, self.x + self.w/4*3, self.y + self.h -1)
         painter.end()
+        
+    def voiLiikkuaYlos(self):
+        return True
+    
+    def voiLiikkuaAlas(self):
+        return True
+    
+    def voiLiikkuaOikealle(self):
+        return True
+    
+    def voiLiikkuaVasemmalle(self):
+        return True
         
         
 class YlikulkuVaakasuuntaPala(SuperPala):
@@ -425,6 +624,18 @@ class YlikulkuVaakasuuntaPala(SuperPala):
         painter.drawLine(self.x, self.y + self.h/4*3, self.x + self.w-1, self.y + self.h/4*3)
         painter.end()
         
+    def voiLiikkuaYlos(self):
+        return True
+    
+    def voiLiikkuaAlas(self):
+        return True
+    
+    def voiLiikkuaOikealle(self):
+        return True
+    
+    def voiLiikkuaVasemmalle(self):
+        return True
+        
 
 class MaaliPala(SuperPala):
     '''
@@ -440,6 +651,18 @@ class MaaliPala(SuperPala):
         painter.begin(window)
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.green)
         painter.end()
+        
+    def voiLiikkuaYlos(self):
+        return False
+    
+    def voiLiikkuaAlas(self):
+        return False
+    
+    def voiLiikkuaOikealle(self):
+        return False
+    
+    def voiLiikkuaVasemmalle(self):
+        return False
         
         
         
