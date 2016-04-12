@@ -2,7 +2,7 @@
 Created on 4 Mar 2016
 
 @author: Martin Vidjeskog
-@version: 0.1.7
+@version: 0.1.8
 '''
 
 

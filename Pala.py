@@ -596,10 +596,10 @@ class YlikulkuPystysuuntaPala(SuperPala):
         return True
     
     def voiLiikkuaOikealle(self):
-        return True
+        return False
     
     def voiLiikkuaVasemmalle(self):
-        return True
+        return False
         
         
 class YlikulkuVaakasuuntaPala(SuperPala):
@@ -625,10 +625,10 @@ class YlikulkuVaakasuuntaPala(SuperPala):
         painter.end()
         
     def voiLiikkuaYlos(self):
-        return True
+        return False
     
     def voiLiikkuaAlas(self):
-        return True
+        return False
     
     def voiLiikkuaOikealle(self):
         return True
