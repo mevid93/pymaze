@@ -25,6 +25,11 @@ class SuperPala(object):
     def getX(self):
         return self.x
     
+    def getKeskipiste(self):
+        x = self.x + self.w/2;
+        y = self.y + self.h/2;
+        return x, y
+    
     def voiLiikkuaYlos(self):
         pass
     
@@ -69,6 +74,9 @@ class VaakasuoraPala(SuperPala):
         painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
         painter.end() 
 
+    def getKeskipiste(self):
+        return super().getKeskipiste()
+
     def voiLiikkuaYlos(self):
         return False
     
@@ -105,6 +113,9 @@ class VaakasuoraVasenPaatyPala(SuperPala):
         painter.fillRect(self.x + self.w/4, self.y + self.h/4, leveys, self.h/2, QtCore.Qt.white)
         painter.end()
         
+    def getKeskipiste(self):
+        return super().getKeskipiste()
+        
     def voiLiikkuaYlos(self):
         return False
     
@@ -135,6 +146,9 @@ class VaakasuoraOikeaPaatyPala(SuperPala):
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
         painter.fillRect(self.x, self.y + self.h/4, self.w/4*3, self.h/2, QtCore.Qt.white)
         painter.end()         
+        
+    def getKeskipiste(self):
+        return super().getKeskipiste()
 
     def voiLiikkuaYlos(self):
         return False
@@ -165,6 +179,9 @@ class PystysuoraPala(SuperPala):
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
         painter.end()
+        
+    def getKeskipiste(self):
+        return super().getKeskipiste()
         
     def voiLiikkuaYlos(self):
         return True
@@ -202,6 +219,9 @@ class PystysuoraYlapaatyPala(SuperPala):
         painter.fillRect(self.x+ self.w/4, self.y + self.h/4, self.w/2, korkeus, QtCore.Qt.white)
         painter.end()
         
+    def getKeskipiste(self):
+        return super().getKeskipiste()
+        
     def voiLiikkuaYlos(self):
         return False
     
@@ -231,6 +251,9 @@ class PystysuoraAlapaatyPala(SuperPala):
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h/4*3, QtCore.Qt.white)
         painter.end()  
+        
+    def getKeskipiste(self):
+        return super().getKeskipiste()
         
     def voiLiikkuaYlos(self):
         return True
@@ -269,6 +292,9 @@ class KaannosNEPala(SuperPala):
             leveys += 1
         painter.fillRect(self.x + self.w/4, self.y + self.h/4, leveys, self.h/2, QtCore.Qt.white)
         painter.end()
+        
+    def getKeskipiste(self):
+        return super().getKeskipiste()
         
     def voiLiikkuaYlos(self):
         return True
@@ -314,6 +340,9 @@ class KaannosSEPala(SuperPala):
         painter.fillRect(self.x + self.w/4, alkuY, self.w/2, self.h/2, QtCore.Qt.white)
         painter.end()  
         
+    def getKeskipiste(self):
+        return super().getKeskipiste()
+        
     def voiLiikkuaYlos(self):
         return False
     
@@ -352,6 +381,9 @@ class KaannosSWPala(SuperPala):
         painter.fillRect(self.x + self.w/4, alkuY, self.w/2, self.h/2, QtCore.Qt.white)
         painter.end()  
         
+    def getKeskipiste(self):
+        return super().getKeskipiste()
+        
     def voiLiikkuaYlos(self):
         return False
     
@@ -383,6 +415,9 @@ class KaannosNWPala(SuperPala):
         painter.fillRect(self.x, self.y + self.h/4, self.w/4*3, self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h/2, QtCore.Qt.white)
         painter.end()
+        
+    def getKeskipiste(self):
+        return super().getKeskipiste()
         
     def voiLiikkuaYlos(self):
         return True
@@ -416,6 +451,9 @@ class TRisteysVasemmallePala(SuperPala):
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
         painter.end()
         
+    def getKeskipiste(self):
+        return super().getKeskipiste()
+        
     def voiLiikkuaYlos(self):
         return True
     
@@ -447,6 +485,9 @@ class TRisteysYlosPala(SuperPala):
         painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h/2, QtCore.Qt.white)
         painter.end()
+        
+    def getKeskipiste(self):
+        return super().getKeskipiste()
         
     def voiLiikkuaYlos(self):
         return True
@@ -484,6 +525,9 @@ class TRisteysOikeallePala(SuperPala):
             leveys += 1
         painter.fillRect(self.x + self.w/4, self.y + self.h/4, leveys, self.h/2, QtCore.Qt.white)
         painter.end()
+        
+    def getKeskipiste(self):
+        return super().getKeskipiste()
         
     def voiLiikkuaYlos(self):
         return True
@@ -523,6 +567,9 @@ class TRisteysAlasPala(SuperPala):
         painter.fillRect(self.x+ self.w/4, self.y + self.h/4, self.w/2, korkeus, QtCore.Qt.white)
         painter.end()
         
+    def getKeskipiste(self):
+        return super().getKeskipiste()
+        
     def voiLiikkuaYlos(self):
         return False
     
@@ -554,6 +601,9 @@ class XRisteysPala(SuperPala):
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
         painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
         painter.end()
+        
+    def getKeskipiste(self):
+        return super().getKeskipiste()
         
     def voiLiikkuaYlos(self):
         return True
@@ -588,6 +638,9 @@ class YlikulkuPystysuuntaPala(SuperPala):
         painter.drawLine(self.x + self.w/4-1, self.y, self.x + self.w/4-1, self.y + self.h -1)
         painter.drawLine(self.x + self.w/4*3, self.y, self.x + self.w/4*3, self.y + self.h -1)
         painter.end()
+        
+    def getKeskipiste(self):
+        return super().getKeskipiste()
         
     def voiLiikkuaYlos(self):
         return True
@@ -624,6 +677,9 @@ class YlikulkuVaakasuuntaPala(SuperPala):
         painter.drawLine(self.x, self.y + self.h/4*3, self.x + self.w-1, self.y + self.h/4*3)
         painter.end()
         
+    def getKeskipiste(self):
+        return super().getKeskipiste()
+        
     def voiLiikkuaYlos(self):
         return False
     
@@ -651,6 +707,9 @@ class MaaliPala(SuperPala):
         painter.begin(window)
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.green)
         painter.end()
+        
+    def getKeskipiste(self):
+        return super().getKeskipiste()
         
     def voiLiikkuaYlos(self):
         return False

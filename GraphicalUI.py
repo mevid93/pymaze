@@ -20,6 +20,7 @@ class GraphUI(QtGui.QWidget):
         self.initUI()
         self.labyrintti = None
         self.hahmo = None
+        self.demo = None
         self.tila = 0
     
     def initUI(self):
@@ -137,6 +138,9 @@ class GraphUI(QtGui.QWidget):
         if(self.tila == 2):
             self.labyrintti.piirraPelialueeseen(self)
             self.hahmo.piirraHahmo(self)
+        if(self.tila == 3):
+            self.labyrintti.piirraPelialueeseen(self)
+            self.demo.piirraReitti()
         painter.end()      
 
         
@@ -192,7 +196,11 @@ class GraphUI(QtGui.QWidget):
         if(sender.text() == "Luovuta ja anna ratkaisu" and self.tila == 2):
             self.tila = 1
             self.update()
-            WallFollower(self, self.labyrintti)
+            self.tila = 3
+            self.demo = WallFollower(self, self.labyrintti)
+            self.demo.selvitaReitti()
+            self.update()
+
                 
                 
 
