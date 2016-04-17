@@ -18,6 +18,8 @@ class WallFollower(object):
         x = int(self.labyrintti.getLeveys()/2) -1
         y = int(self.labyrintti.getKorkeus()/2) -1
         suunta = "N"
+        if(type(self.labyrintti.getPala(x, y)).__name__ == "YlikulkuVaakasuuntaPala"):
+            suunta = "E"
         self.palalista.append(self.labyrintti.getPala(x,y))
         while(type(self.labyrintti.getPala(x, y)).__name__ != "MaaliPala"):
             tyyppi = type(self.labyrintti.getPala(x,y)).__name__ 
@@ -78,7 +80,42 @@ class WallFollower(object):
                 else:
                     suunta = "W"
                     x = x-1
-            self.palalista.append(self.labyrintti.getPala(x, y))
+            pala = self.labyrintti.getPala(x, y)
+            tyyppi = type(pala).__name__
+            if(pala in self.palalista):
+                if(tyyppi == "YlikulkuPystysuuntaPala" or tyyppi == "YlikulkuVaakasuuntaPala"):
+                    vieruspalat = []
+                    vieruspalat.append(self.labyrintti.getPala(x-1, y))
+                    vieruspalat.append(self.labyrintti.getPala(x+1, y))
+                    vieruspalat.append(self.labyrintti.getPala(x, y-1))
+                    vieruspalat.append(self.labyrintti.getPala(x, y+1))
+                    kpl = 0
+                    for vieruspala in vieruspalat:
+                        if(vieruspala in self.palalista):
+                            kpl += 1
+                    if(kpl == 1):
+                        index = self.rindex(self.palalista, pala)
+                        self.palalista = self.palalista[0:index+1]
+                    if(kpl == 2 and (vieruspalat[0] in self.palalista) and (vieruspalat[1] in self.palalista)):
+                        index = self.rindex(self.palalista, pala)
+                        self.palalista = self.palalista[0:index+1]
+                    elif(kpl == 2 and len(vieruspalat) == 4 and (vieruspalat[2] in self.palalista) and (vieruspalat[3] in self.palalista)):
+                        index = self.rindex(self.palalista, pala)
+                        self.palalista = self.palalista[0:index+1]
+                    elif(kpl == 4):
+                        index = self.rindex(self.palalista, pala)
+                        self.palalista = self.palalista[0:index+1]
+                    else:
+                        self.palalista.append(pala)
+                else:
+                    index = self.rindex(self.palalista, pala)
+                    self.palalista = self.palalista[0:index+1]
+            else:
+                self.palalista.append(pala)
+                
+
+    def rindex(self, mylist, myvalue):
+        return len(mylist) - mylist[::-1].index(myvalue) - 1
 
     
     def piirraReitti(self):
