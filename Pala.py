@@ -371,7 +371,7 @@ class KaannosSWPala(SuperPala):
         painter = QtGui.QPainter()
         painter.begin(window)
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
-        painter.fillRect(self.x, self.y + self.h/4, self.w/4*3, self.h/2, QtCore.Qt.white)
+        painter.fillRect(self.x, self.y + self.h/4, int(self.w/4)+int(self.w/2), self.h/2, QtCore.Qt.white)
         alkuY = self.y + self.h/2    # pieni laskutoimitus jolla varmistetaan etta ei jaa reunoja
         while(True):
             if(alkuY + self.h/2 == self.y + self.h):
@@ -412,7 +412,7 @@ class KaannosNWPala(SuperPala):
         painter = QtGui.QPainter()
         painter.begin(window)
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
-        painter.fillRect(self.x, self.y + self.h/4, self.w/4*3, self.h/2, QtCore.Qt.white)
+        painter.fillRect(self.x, self.y + self.h/4, int(self.w/4)+int(self.w/2), self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h/2, QtCore.Qt.white)
         painter.end()
         
@@ -447,7 +447,7 @@ class TRisteysVasemmallePala(SuperPala):
         painter = QtGui.QPainter()
         painter.begin(window)
         painter.fillRect(self.x, self.y, self.w, self.h, QtCore.Qt.black)
-        painter.fillRect(self.x, self.y + self.h/4, self.w/4*3, self.h/2, QtCore.Qt.white)
+        painter.fillRect(self.x, self.y + self.h/4, int(self.w/4)+int(self.w/2), self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
         painter.end()
         
@@ -636,7 +636,7 @@ class YlikulkuPystysuuntaPala(SuperPala):
         painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
         painter.drawLine(self.x + self.w/4-1, self.y, self.x + self.w/4-1, self.y + self.h -1)
-        painter.drawLine(self.x + self.w/4*3, self.y, self.x + self.w/4*3, self.y + self.h -1)
+        painter.drawLine(self.x + int(self.w/4)+int(self.w/2), self.y, self.x + int(self.w/4)+int(self.w/2), self.y + self.h -1)
         painter.end()
         
     def getKeskipiste(self):
@@ -674,7 +674,7 @@ class YlikulkuVaakasuuntaPala(SuperPala):
         painter.fillRect(self.x, self.y + self.h/4, self.w, self.h/2, QtCore.Qt.white)
         painter.fillRect(self.x + self.w/4, self.y, self.w/2, self.h, QtCore.Qt.white)
         painter.drawLine(self.x, self.y + self.h/4-1, self.x + self.w-1, self.y + self.h/4-1)
-        painter.drawLine(self.x, self.y + self.h/4*3, self.x + self.w-1, self.y + self.h/4*3)
+        painter.drawLine(self.x, self.y + int(self.h/4)+int(self.h/2), self.x + self.w-1, self.y + int(self.h/4)+int(self.h/2))
         painter.end()
         
     def getKeskipiste(self):

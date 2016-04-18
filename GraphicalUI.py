@@ -36,7 +36,7 @@ class GraphUI(QtGui.QWidget):
         p = self.palette()
         p.setColor(self.backgroundRole(), QtGui.QColor("#808080"))
         self.setPalette(p)
-        self.setWindowTitle("Labyrintti V.0.2.2")
+        self.setWindowTitle("Labyrintti V.0.2.3")
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
@@ -82,14 +82,14 @@ class GraphUI(QtGui.QWidget):
         self.exitButton.clicked.connect(lambda: self.buttonClicked())
         self.exitButton.resize(200, 50)
         self.exitButton.move(50, 476)
-        #labyrintin asetukset
+        #labyrintin asetusvalikko
         font = QtGui.QFont()
         font.setBold(True)
         font.setPointSize(14)
-        self.label = QtGui.QLabel("Valitse labyrintin tyyppi", self)
-        self.label.setFont(font)
-        self.label.move(290, 40)
-        self.label.setVisible(False)
+        self.label1 = QtGui.QLabel("Valitse labyrintin tyyppi", self)
+        self.label1.setFont(font)
+        self.label1.move(290, 40)
+        self.label1.setVisible(False)
         self.checkBox1 = QtGui.QCheckBox("Tavallinen 2DLabyrintti", self)
         self.checkBox1.move(300, 70)
         self.checkBox1.setVisible(False)
@@ -101,9 +101,24 @@ class GraphUI(QtGui.QWidget):
         self.generoi = QtGui.QPushButton("Generoi", self)
         self.generoi.clicked.connect(lambda: self.buttonClicked())
         self.generoi.resize(100, 30)
-        self.generoi.move(300, 130)
+        self.generoi.move(290, 200)
+        self.generoi.setStyleSheet("border: 2px solid black")
         self.generoi.setVisible(False)
-
+        self.leveysBox = QtGui.QSpinBox(self)
+        self.leveysBox.move(300, 160)
+        self.leveysBox.resize(70, 30)
+        self.leveysBox.setMinimum(15)
+        self.leveysBox.setMaximum(50)
+        self.leveysBox.setVisible(False)
+        self.label2 = QtGui.QLabel("Anna leveys/korkeus", self)
+        self.label2.setFont(font)
+        self.label2.move(290, 130)
+        self.label2.setVisible(False)
+        self.label3 = QtGui.QLabel("Leveys/korkeus (min = 15, max = 50)", self)
+        self.label3.move(380, 170)
+        self.label3.setVisible(False)     
+        
+        
 
 
     def showWindow(self):
@@ -127,12 +142,18 @@ class GraphUI(QtGui.QWidget):
         if not(self.checkBox1.isVisible()):
             self.checkBox1.setVisible(True)
             self.checkBox2.setVisible(True)
-            self.label.setVisible(True)
+            self.label1.setVisible(True)
+            self.label2.setVisible(True)
+            self.label3.setVisible(True)
+            self.leveysBox.setVisible(True)
             self.generoi.setVisible(True)
         else:
             self.checkBox1.setVisible(False)
             self.checkBox2.setVisible(False)
-            self.label.setVisible(False)
+            self.label1.setVisible(False)
+            self.label2.setVisible(False)
+            self.label3.setVisible(False)
+            self.leveysBox.setVisible(False)
             self.generoi.setVisible(False)
 
 
@@ -204,10 +225,11 @@ class GraphUI(QtGui.QWidget):
             self.tila = 0
             self.labyrintti = None
             self.update()
-            self.asetusvalikko()
+            if not(self.label1.isVisible()):
+                self.asetusvalikko()
         if(sender.text() == "Tietoja ohjelmasta" and self.tila != 2):
             self.textbox.clear()
-            self.textbox.setText("Labyrintti-peli V.0.2.2\n")
+            self.textbox.setText("Labyrintti-peli V.0.2.3\n")
             self.textbox.append("Ohjelma on tehty Aalto-yliopiston kurssin Ohjelmoinnin peruskurssi Y2 suorittamiseksi.")
             self.textbox.append("Ohjelman lahdekoodi on vapaasti saatavissa GitHubista.")
             self.textbox.append("GitHub:  https://github.com/mevid93/PythonY2Labyrintti.git")
@@ -231,6 +253,8 @@ class GraphUI(QtGui.QWidget):
             labyrintti = lataaja.lataaLabyrintti()
             if(labyrintti != None):
                 self.labyrintti = labyrintti
+                if (self.label1.isVisible()):
+                    self.asetusvalikko()
                 self.tila = 1
                 self.update()
                 self.textbox.clear()
@@ -245,8 +269,8 @@ class GraphUI(QtGui.QWidget):
             self.textbox.clear()
             self.textbox.setText("Luovutit. Tassa esimerkkiratkaisu.")
         if(sender.text() == "Generoi" and self.tila != 2):
-            leveys = 20
-            korkeus = 20
+            leveys = self.leveysBox.value()
+            korkeus = leveys
             if(self.checkBox2.isChecked()):
                 self.labyrintti = WeaveLabyrintti(leveys, korkeus)
                 self.asetusvalikko()

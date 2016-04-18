@@ -13,7 +13,7 @@ from Pala import *
 def luo2Dlabyrintti(leveys, korkeus):
     pixelX = 275
     pixelY = 25
-    pixelSivu = 25
+    pixelSivu = int((775-275)/leveys)
     lista = [[[] for x in range(leveys)] for x in range(korkeus)]
     #luodaan aloituspiste melko tarkasti keskelle labyrinttia 
     alkuX = int(leveys/2)

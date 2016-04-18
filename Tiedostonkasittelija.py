@@ -30,7 +30,7 @@ class Tallentaja(object):
             file.write("\n\n")
             file.write("#Palan leveys: " + str(self.lista[0][0].getW()))
             file.write("\n\n")
-            file.write("#Palan korkeus: " + str(self.lista[0][0].getY()))
+            file.write("#Palan korkeus: " + str(self.lista[0][0].getH()))
             file.write("\n\n")
             file.write("#Palat: \n")
             for y in range(self.korkeus):
@@ -64,6 +64,7 @@ class Lataaja(object):
             tyyppi = ""
             leveys = -1
             korkeus = -1
+            palanKorkeus = 0
             palalista = []
             try:
                 file = open(name, 'r')
@@ -95,6 +96,8 @@ class Lataaja(object):
                             if(korkeus < 10 or checkTyyppi == False):               #labyrintin minimikorkeus 10 ruutua! ja tyyppi on oltava luettu ensin
                                 return None
                             checkKorkeus = True
+                        elif(osat[0] == "#Palan korkeus"):
+                            palanKorkeus = self.stringToInt(osat[1])
                         elif(osat[0] == "#Palat"):
                             checkPalat = True
                         elif(checkPalat == True):                     #Tarkoittaa sita etta nyt luetaan palojen dataa. Palojen jarjestyksella ei valia.
@@ -113,7 +116,7 @@ class Lataaja(object):
                                         self.window.textbox.setText("Labyrintti sisaltaa virheellisen palan.")
                                         return None
                                     else:
-                                        palalista.append(self.luoPala(palatyyppi, x, y))
+                                        palalista.append(self.luoPala(palatyyppi, x, y, palanKorkeus, palanKorkeus))
                                 else:
                                     self.window.textbox.clear()
                                     self.window.textbox.setText("Labyrintti sisaltaa virheellisen palan.")
@@ -156,43 +159,43 @@ class Lataaja(object):
             return -1
         
         
-    def luoPala(self, palatyyppi, x, y):
+    def luoPala(self, palatyyppi, x, y, w, h):
         if(palatyyppi == "VaakasuoraPala"):
-            return VaakasuoraPala(x,y, 25, 25)
+            return VaakasuoraPala(x,y,w,h)
         elif(palatyyppi == "VaakasuoraVasenPaatyPala"):
-            return VaakasuoraVasenPaatyPala(x,y, 25, 25)
+            return VaakasuoraVasenPaatyPala(x,y,w,h)
         elif(palatyyppi == "VaakasuoraOikeaPaatyPala"):
-            return VaakasuoraOikeaPaatyPala(x,y, 25, 25)
+            return VaakasuoraOikeaPaatyPala(x,y,w,h)
         elif(palatyyppi == "PystysuoraPala"):
-            return PystysuoraPala(x,y, 25, 25)
+            return PystysuoraPala(x,y,w,h)
         elif(palatyyppi == "PystysuoraYlapaatyPala"):
-            return PystysuoraYlapaatyPala(x,y, 25, 25)
+            return PystysuoraYlapaatyPala(x,y,w,h)
         elif(palatyyppi == "PystysuoraAlapaatyPala"):
-            return PystysuoraAlapaatyPala(x,y, 25, 25)
+            return PystysuoraAlapaatyPala(x,y,w,h)
         elif(palatyyppi == "KaannosNEPala"):
-            return KaannosNEPala(x,y, 25, 25)
+            return KaannosNEPala(x,y,w,h)
         elif(palatyyppi == "KaannosSEPala"):
-            return KaannosSEPala(x,y, 25, 25)
+            return KaannosSEPala(x,y,w,h)
         elif(palatyyppi == "KaannosSWPala"):
-            return KaannosSWPala(x,y, 25, 25)
+            return KaannosSWPala(x,y,w,h)
         elif(palatyyppi == "KaannosNWPala"):
-            return KaannosNWPala(x,y, 25, 25)
+            return KaannosNWPala(x,y,w,h)
         elif(palatyyppi == "TRisteysVasemmallePala"):
-            return TRisteysVasemmallePala(x,y, 25, 25)
+            return TRisteysVasemmallePala(x,y,w,h)
         elif(palatyyppi == "TRisteysYlosPala"):
-            return TRisteysYlosPala(x,y, 25, 25)
+            return TRisteysYlosPala(x,y,w,h)
         elif(palatyyppi == "TRisteysOikeallePala"):
-            return TRisteysOikeallePala(x,y, 25, 25)
+            return TRisteysOikeallePala(x,y,w,h)
         elif(palatyyppi == "TRisteysAlasPala"):
-            return TRisteysAlasPala(x,y, 25, 25)
+            return TRisteysAlasPala(x,y,w,h)
         elif(palatyyppi == "XRisteysPala"):
-            return XRisteysPala(x,y, 25, 25)
+            return XRisteysPala(x,y,w,h)
         elif(palatyyppi == "YlikulkuPystysuuntaPala"):
-            return YlikulkuPystysuuntaPala(x,y, 25, 25)
+            return YlikulkuPystysuuntaPala(x,y,w,h)
         elif(palatyyppi == "YlikulkuVaakasuuntaPala"):
-            return YlikulkuVaakasuuntaPala(x,y, 25, 25)
+            return YlikulkuVaakasuuntaPala(x,y,w,h)
         elif(palatyyppi == "MaaliPala"):
-            return MaaliPala(x,y, 25, 25)
+            return MaaliPala(x,y,w,h)
          
         
         

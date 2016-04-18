@@ -27,7 +27,7 @@ class Hahmo(object):
     def piirraHahmo(self, window):
         painter = QtGui.QPainter()
         painter.begin(window)
-        painter.fillRect(self.pala.getX() + self.pala.getW()/4 + 1, self.pala.getY() + self.pala.getH()/4 + 1, 10, 10, QtCore.Qt.red)
+        painter.fillRect(self.pala.getX() + self.pala.getW()/4+1, self.pala.getY() + self.pala.getH()/4+1, self.pala.getW()/2-2, self.pala.getH()/2-2, QtCore.Qt.red)
         painter.end()
         
     def getSijainti(self):
