@@ -19,16 +19,7 @@ class Labyrintti(object):
         self.lista = [] 
         self.leveys = leveys
         self.korkeus = korkeus 
-    
-    def luoLabyrintti(self):
-        pass
-    
-    def piirraPelialueeseen(self, window):
-        pass
 
-    def getTyyppi(self):
-        pass
-    
     def getLeveys(self):
         return self.leveys
     
@@ -41,13 +32,26 @@ class Labyrintti(object):
     def getPalat(self):
         return self.lista
     
+    def luoLabyrintti(self):
+        pass
+    
+    def piirraPelialueeseen(self, window):
+        pass
+
+    def getTyyppi(self):
+        pass
+    
+    
     
 
 class KaksiDLabyrintti(Labyrintti):
     
-    def __init__(self, leveys, korkeus):
+    def __init__(self, leveys, korkeus, lista = []):
         super().__init__(leveys, korkeus)
-        self.luoLabyrintti()
+        if(len(lista) == 0):
+            self.luoLabyrintti()
+        else:
+            self.lista = lista
         
     def luoLabyrintti(self):
         self.lista = Luontialgoritmi1.luo2Dlabyrintti(self.leveys, self.korkeus)
@@ -60,6 +64,7 @@ class KaksiDLabyrintti(Labyrintti):
                     
     def getTyyppi(self):
         return "KaksiDLabyrintti"
+      
       
       
       

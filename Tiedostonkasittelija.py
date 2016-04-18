@@ -135,6 +135,14 @@ class Lataaja(object):
                         lista[j][i] = palalista[sija]
                         sija += 1 
                 return WeaveLabyrintti(leveys, korkeus, lista)
+            if(tyyppi == "KaksiDLabyrintti" and len(palalista) == korkeus*leveys):
+                lista = [[0 for x in range(leveys)] for x in range(korkeus)]
+                sija = 0
+                for j in range(korkeus):
+                    for i in range(leveys):
+                        lista[j][i] = palalista[sija]
+                        sija += 1 
+                return WeaveLabyrintti(leveys, korkeus, lista)
             return None
         return None
         

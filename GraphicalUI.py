@@ -13,7 +13,10 @@ from Tiedostonkasittelija import Tallentaja, Lataaja
 from Ratkaisualgoritmi1 import WallFollower
 
 
+
 class GraphUI(QtGui.QWidget):
+
+
 
     def __init__(self):
         super(GraphUI, self).__init__()
@@ -23,6 +26,8 @@ class GraphUI(QtGui.QWidget):
         self.demo = None
         self.tila = 0
     
+    
+    
     def initUI(self):
         #ikkunan alustaminen
         self.setFixedSize(825, 700)
@@ -31,7 +36,7 @@ class GraphUI(QtGui.QWidget):
         p = self.palette()
         p.setColor(self.backgroundRole(), QtGui.QColor("#808080"))
         self.setPalette(p)
-        self.setWindowTitle("Labyrintti V.0.2.1")
+        self.setWindowTitle("Labyrintti V.0.2.2")
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
@@ -77,6 +82,59 @@ class GraphUI(QtGui.QWidget):
         self.exitButton.clicked.connect(lambda: self.buttonClicked())
         self.exitButton.resize(200, 50)
         self.exitButton.move(50, 476)
+        #labyrintin asetukset
+        font = QtGui.QFont()
+        font.setBold(True)
+        font.setPointSize(14)
+        self.label = QtGui.QLabel("Valitse labyrintin tyyppi", self)
+        self.label.setFont(font)
+        self.label.move(290, 40)
+        self.label.setVisible(False)
+        self.checkBox1 = QtGui.QCheckBox("Tavallinen 2DLabyrintti", self)
+        self.checkBox1.move(300, 70)
+        self.checkBox1.setVisible(False)
+        self.checkBox2 = QtGui.QCheckBox("WeaveLabyrintti", self)
+        self.checkBox2.move(300, 100)
+        self.checkBox2.setVisible(False)
+        self.checkBox2.clicked.connect(lambda: self.vaihdaValintaa())
+        self.checkBox1.clicked.connect(lambda: self.vaihdaValintaa())
+        self.generoi = QtGui.QPushButton("Generoi", self)
+        self.generoi.clicked.connect(lambda: self.buttonClicked())
+        self.generoi.resize(100, 30)
+        self.generoi.move(300, 130)
+        self.generoi.setVisible(False)
+
+
+
+    def showWindow(self):
+        app = QtGui.QApplication(sys.argv)
+        self.show()
+        sys.exit(app.exec_())
+
+
+
+    def vaihdaValintaa(self):
+        sender = self.sender()
+        if(sender.text() == "Tavallinen 2DLabyrintti"):
+            self.checkBox1.setChecked(True)
+            self.checkBox2.setChecked(False)
+        else:
+            self.checkBox1.setChecked(False)
+            self.checkBox2.setChecked(True)
+
+
+    def asetusvalikko(self):
+        if not(self.checkBox1.isVisible()):
+            self.checkBox1.setVisible(True)
+            self.checkBox2.setVisible(True)
+            self.label.setVisible(True)
+            self.generoi.setVisible(True)
+        else:
+            self.checkBox1.setVisible(False)
+            self.checkBox2.setVisible(False)
+            self.label.setVisible(False)
+            self.generoi.setVisible(False)
+
 
 
     def keyPressEvent(self, e):
@@ -119,12 +177,7 @@ class GraphUI(QtGui.QWidget):
                 self.tila = 1
                 self.textbox.clear()
                 self.textbox.setText("SELVITIT LABYRINTIN!!")
-                
-        
-    def showWindow(self):
-        app = QtGui.QApplication(sys.argv)
-        self.show()
-        sys.exit(app.exec_())
+
 
     
     def paintEvent(self, event):
@@ -132,7 +185,7 @@ class GraphUI(QtGui.QWidget):
         painter.begin(self)
         if(self.tila == 0):
             painter.drawRect(274, 24, 501, 501)
-            self.tyhjennaPelialue()
+            painter.fillRect(275, 25, 500, 500, QtGui.QColor("#E0E0E0"))
         if(self.tila == 1):
             self.labyrintti.piirraPelialueeseen(self)
         if(self.tila == 2):
@@ -143,29 +196,18 @@ class GraphUI(QtGui.QWidget):
             self.demo.piirraReitti()
         painter.end()      
 
-        
-    def setTextboxText(self, string):
-        self.textbox.setText(string)
-
-
-    def tyhjennaPelialue(self):
-        painter = QtGui.QPainter()
-        painter.begin(self)
-        painter.fillRect(275, 25, 500, 500, QtGui.QColor("#E0E0E0"))
-        painter.end() 
    
         
     def buttonClicked(self):
         sender = self.sender()
         if(sender.text() == "Generoi Labyrintti" and self.tila != 2):
-            leveys = 20
-            korkeus = 20
-            self.labyrintti = WeaveLabyrintti(leveys, korkeus)
-            self.tila = 1
+            self.tila = 0
+            self.labyrintti = None
             self.update()
+            self.asetusvalikko()
         if(sender.text() == "Tietoja ohjelmasta" and self.tila != 2):
             self.textbox.clear()
-            self.textbox.setText("Labyrintti-peli V.0.2.1\n")
+            self.textbox.setText("Labyrintti-peli V.0.2.2\n")
             self.textbox.append("Ohjelma on tehty Aalto-yliopiston kurssin Ohjelmoinnin peruskurssi Y2 suorittamiseksi.")
             self.textbox.append("Ohjelman lahdekoodi on vapaasti saatavissa GitHubista.")
             self.textbox.append("GitHub:  https://github.com/mevid93/PythonY2Labyrintti.git")
@@ -177,7 +219,7 @@ class GraphUI(QtGui.QWidget):
             y = int(self.labyrintti.getKorkeus()/2)-1
             self.hahmo = Hahmo(self.labyrintti.getPala(x, y), x, y)
             self.textbox.clear()
-            self.setTextboxText("PELI ON KAYNNISSA! Etsi reitti ulos labyrintista.\nVoit aina luovuttaa jos et keksi ratkaisua.")
+            self.textbox.setText("PELI ON KAYNNISSA! Etsi reitti ulos labyrintista.\nVoit aina luovuttaa jos et keksi ratkaisua.")
             self.update()
         if(sender.text() == "Lopeta"):
             sys.exit()
@@ -202,6 +244,20 @@ class GraphUI(QtGui.QWidget):
             self.update()
             self.textbox.clear()
             self.textbox.setText("Luovutit. Tassa esimerkkiratkaisu.")
+        if(sender.text() == "Generoi" and self.tila != 2):
+            leveys = 20
+            korkeus = 20
+            if(self.checkBox2.isChecked()):
+                self.labyrintti = WeaveLabyrintti(leveys, korkeus)
+                self.asetusvalikko()
+                self.tila = 1
+                self.update()
+            if(self.checkBox1.isChecked()):
+                self.labyrintti = KaksiDLabyrintti(leveys, korkeus)
+                self.asetusvalikko()
+                self.tila = 1
+                self.update()
+        
 
                 
                 
