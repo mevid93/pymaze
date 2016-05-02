@@ -19,7 +19,13 @@ class Labyrintti(object):
         self.lista = [] 
         self.leveys = leveys
         self.korkeus = korkeus 
-
+        
+    def piirraPelialueeseen(self, window):
+        for y in range(self.leveys):
+            for x in range(self.korkeus):
+                if(self.lista[y][x]):
+                    self.lista[y][x].paintPala(window)
+                    
     def getLeveys(self):
         return self.leveys
     
@@ -34,14 +40,10 @@ class Labyrintti(object):
     
     def luoLabyrintti(self):
         pass
-    
-    def piirraPelialueeseen(self, window):
-        pass
 
     def getTyyppi(self):
         pass
-    
-    
+     
     
 
 class KaksiDLabyrintti(Labyrintti):
@@ -55,16 +57,9 @@ class KaksiDLabyrintti(Labyrintti):
         
     def luoLabyrintti(self):
         self.lista = Luontialgoritmi1.luo2Dlabyrintti(self.leveys, self.korkeus)
-        
-    def piirraPelialueeseen(self, window):
-        for y in range(self.leveys):
-            for x in range(self.korkeus):
-                if(self.lista[y][x]):
-                    self.lista[y][x].paintPala(window)
                     
     def getTyyppi(self):
         return "KaksiDLabyrintti"
-      
       
       
       
@@ -79,12 +74,6 @@ class WeaveLabyrintti(Labyrintti):
             
     def luoLabyrintti(self):
         self.lista = Luontialgoritmi2.luoWeaveLabyrintti(self.leveys, self.korkeus)
-        
-    def piirraPelialueeseen(self, window):
-        for y in range(self.leveys):
-            for x in range(self.korkeus):
-                if(self.lista[y][x]):
-                    self.lista[y][x].paintPala(window)
                     
     def getTyyppi(self):
         return "WeaveLabyrintti"

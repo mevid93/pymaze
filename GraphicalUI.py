@@ -7,16 +7,13 @@ Created on 4 Mar 2016
 
 import sys
 from PyQt4 import QtGui, QtCore
-from Labyrintti import KaksiDLabyrintti, WeaveLabyrintti
-from Pelaaja import Hahmo
-from Tiedostonkasittelija import Tallentaja, Lataaja
-from Ratkaisualgoritmi1 import WallFollower
-
-
+from Kuuntelija import NappienKuuntelija
 
 class GraphUI(QtGui.QWidget):
-
-
+    '''
+    Kayttoliittyma-luokka, joka huolehtii kayttoliittyman piirtamisesta
+    ja komentojen vastaanottamisesta. 
+    '''
 
     def __init__(self):
         super(GraphUI, self).__init__()
@@ -25,7 +22,8 @@ class GraphUI(QtGui.QWidget):
         self.hahmo = None
         self.demo = None
         self.tila = 0
-    
+        self.nappienKuuntelija = NappienKuuntelija(self)
+
     
     
     def initUI(self):
@@ -36,7 +34,7 @@ class GraphUI(QtGui.QWidget):
         p = self.palette()
         p.setColor(self.backgroundRole(), QtGui.QColor("#808080"))
         self.setPalette(p)
-        self.setWindowTitle("Labyrintti V.0.2.3")
+        self.setWindowTitle("Labyrintti V.0.2.4")
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
@@ -117,8 +115,7 @@ class GraphUI(QtGui.QWidget):
         self.label3 = QtGui.QLabel("Leveys/korkeus (min = 15, max = 50)", self)
         self.label3.move(380, 170)
         self.label3.setVisible(False)     
-        
-        
+          
 
 
     def showWindow(self):
@@ -136,6 +133,7 @@ class GraphUI(QtGui.QWidget):
         else:
             self.checkBox1.setChecked(False)
             self.checkBox2.setChecked(True)
+
 
 
     def asetusvalikko(self):
@@ -221,67 +219,7 @@ class GraphUI(QtGui.QWidget):
         
     def buttonClicked(self):
         sender = self.sender()
-        if(sender.text() == "Generoi Labyrintti" and self.tila != 2):
-            self.tila = 0
-            self.labyrintti = None
-            self.update()
-            if not(self.label1.isVisible()):
-                self.asetusvalikko()
-        if(sender.text() == "Tietoja ohjelmasta" and self.tila != 2):
-            self.textbox.clear()
-            self.textbox.setText("Labyrintti-peli V.0.2.3\n")
-            self.textbox.append("Ohjelma on tehty Aalto-yliopiston kurssin Ohjelmoinnin peruskurssi Y2 suorittamiseksi.")
-            self.textbox.append("Ohjelman lahdekoodi on vapaasti saatavissa GitHubista.")
-            self.textbox.append("GitHub:  https://github.com/mevid93/PythonY2Labyrintti.git")
-            self.textbox.append("Ohjelmoija: Martin Vidjeskog")
-            self.textbox.append("Kevat 2016")
-        if(sender.text() == "Pelaa" and self.labyrintti != None):
-            self.tila = 2
-            x = int(self.labyrintti.getLeveys()/2)-1
-            y = int(self.labyrintti.getKorkeus()/2)-1
-            self.hahmo = Hahmo(self.labyrintti.getPala(x, y), x, y)
-            self.textbox.clear()
-            self.textbox.setText("PELI ON KAYNNISSA! Etsi reitti ulos labyrintista.\nVoit aina luovuttaa jos et keksi ratkaisua.")
-            self.update()
-        if(sender.text() == "Lopeta"):
-            sys.exit()
-        if(sender.text() == "Tallenna Labyrintti" and self.tila != 2 and self.labyrintti != None):
-            tallentaja = Tallentaja(self, self.labyrintti)
-            tallentaja.tallennaLabyrintti()
-        if(sender.text() == "Lataa Labyrintti" and self.tila != 2):
-            lataaja = Lataaja(self)
-            labyrintti = lataaja.lataaLabyrintti()
-            if(labyrintti != None):
-                self.labyrintti = labyrintti
-                if (self.label1.isVisible()):
-                    self.asetusvalikko()
-                self.tila = 1
-                self.update()
-                self.textbox.clear()
-                self.textbox.setText("Labyrintin lataus onnistui.")
-        if(sender.text() == "Luovuta ja anna ratkaisu" and self.tila == 2):
-            self.tila = 1
-            self.update()
-            self.tila = 3
-            self.demo = WallFollower(self, self.labyrintti)
-            self.demo.selvitaReitti()
-            self.update()
-            self.textbox.clear()
-            self.textbox.setText("Luovutit. Tassa esimerkkiratkaisu.")
-        if(sender.text() == "Generoi" and self.tila != 2):
-            leveys = self.leveysBox.value()
-            korkeus = leveys
-            if(self.checkBox2.isChecked()):
-                self.labyrintti = WeaveLabyrintti(leveys, korkeus)
-                self.asetusvalikko()
-                self.tila = 1
-                self.update()
-            if(self.checkBox1.isChecked()):
-                self.labyrintti = KaksiDLabyrintti(leveys, korkeus)
-                self.asetusvalikko()
-                self.tila = 1
-                self.update()
-        
+        self.nappienKuuntelija.suoritaNapinToiminnot(sender)
 
                 
                 
