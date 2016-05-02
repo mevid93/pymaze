@@ -7,12 +7,15 @@ Created on 4 Mar 2016
 
 import sys
 from PyQt4 import QtGui, QtCore
-from Kuuntelija import NappienKuuntelija
+from NappienToiminnot import NappienKuuntelija
+from NappainToiminnot import NappainKuuntelija
+
 
 class GraphUI(QtGui.QWidget):
     '''
     Kayttoliittyma-luokka, joka huolehtii kayttoliittyman piirtamisesta
-    ja komentojen vastaanottamisesta. 
+    ja komentojen vastaanottamisesta ja muiden luokkien toimintojen 
+    kutsumisesta.
     '''
 
     def __init__(self):
@@ -23,7 +26,8 @@ class GraphUI(QtGui.QWidget):
         self.demo = None
         self.tila = 0
         self.nappienKuuntelija = NappienKuuntelija(self)
-
+        self.nappainKuuntelija = NappainKuuntelija(self)
+    
     
     
     def initUI(self):
@@ -34,7 +38,7 @@ class GraphUI(QtGui.QWidget):
         p = self.palette()
         p.setColor(self.backgroundRole(), QtGui.QColor("#808080"))
         self.setPalette(p)
-        self.setWindowTitle("Labyrintti V.0.2.4")
+        self.setWindowTitle("Labyrintti V.0.2.5")
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
@@ -156,49 +160,6 @@ class GraphUI(QtGui.QWidget):
 
 
 
-    def keyPressEvent(self, e):
-        if(self.tila == 2):
-            x, y = self.hahmo.getSijainti()
-            liikuta = 1
-            if (e.key() == QtCore.Qt.Key_W):
-                if(y > 0 and self.labyrintti.getPala(x, y).voiLiikkuaYlos()):
-                    while(type(self.labyrintti.getPala(x, y-liikuta)).__name__ == "YlikulkuVaakasuuntaPala"):
-                        liikuta += 1
-                    y = y - liikuta 
-                    pala = self.labyrintti.getPala(x, y)
-                    self.hahmo.liikutaHahmoa(pala, x, y)
-                    self.update()
-            elif(e.key() == QtCore.Qt.Key_S):
-                if(y < self.labyrintti.getKorkeus()-1 and self.labyrintti.getPala(x, y).voiLiikkuaAlas()):
-                    while(type(self.labyrintti.getPala(x, y+liikuta)).__name__ == "YlikulkuVaakasuuntaPala"):
-                        liikuta += 1
-                    y = y + liikuta 
-                    pala = self.labyrintti.getPala(x, y)
-                    self.hahmo.liikutaHahmoa(pala, x, y)
-                    self.update()
-            elif(e.key() == QtCore.Qt.Key_A):
-                if(x > 0 and self.labyrintti.getPala(x, y).voiLiikkuaVasemmalle()):
-                    while(type(self.labyrintti.getPala(x-liikuta, y)).__name__ == "YlikulkuPystysuuntaPala"):
-                        liikuta += 1
-                    x = x - liikuta 
-                    pala = self.labyrintti.getPala(x, y)
-                    self.hahmo.liikutaHahmoa(pala, x, y)
-                    self.update()
-            elif(e.key() == QtCore.Qt.Key_D):
-                if(x < self.labyrintti.getLeveys()-1 and self.labyrintti.getPala(x, y).voiLiikkuaOikealle()):
-                    while(type(self.labyrintti.getPala(x+liikuta, y)).__name__ == "YlikulkuPystysuuntaPala"):
-                        liikuta += 1
-                    x = x + liikuta 
-                    pala = self.labyrintti.getPala(x, y)
-                    self.hahmo.liikutaHahmoa(pala, x, y)
-                    self.update()
-            if(type(self.labyrintti.getPala(x,y)).__name__ == "MaaliPala"):
-                self.tila = 1
-                self.textbox.clear()
-                self.textbox.setText("SELVITIT LABYRINTIN!!")
-
-
-    
     def paintEvent(self, event):
         painter = QtGui.QPainter()
         painter.begin(self)
@@ -221,6 +182,11 @@ class GraphUI(QtGui.QWidget):
         sender = self.sender()
         self.nappienKuuntelija.suoritaNapinToiminnot(sender)
 
+
+
+    def keyPressEvent(self, e):
+        if(self.tila == 2):
+            self.nappainKuuntelija.suoritaNappaimenToiminto(e)
                 
                 
 

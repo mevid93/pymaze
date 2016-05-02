@@ -55,13 +55,24 @@ class NappienKuuntelija(object):
             
     def tietojaOhjelmastaKomento(self):
         self.window.textbox.clear()
-        self.window.textbox.setText("Labyrintti-peli V.0.2.4\n")
+        self.window.textbox.setText("Labyrintti-peli V.0.2.5\n")
         self.window.textbox.append("Ohjelma on tehty Aalto-yliopiston kurssin Ohjelmoinnin peruskurssi Y2 suorittamiseksi.")
         self.window.textbox.append("Ohjelman lahdekoodi on vapaasti saatavissa GitHubista.")
         self.window.textbox.append("GitHub:  https://github.com/mevid93/PythonY2Labyrintti.git")
         self.window.textbox.append("Ohjelmoija: Martin Vidjeskog")
-        self.window.textbox.append("Kevat 2016")
-        
+        self.window.textbox.append("\n")
+        self.window.textbox.append("Ohjeet:")
+        self.window.textbox.append("1. Lataa tai luo ensin labyrintti.")
+        self.window.textbox.append("2. Paina pelaa nappia.")
+        self.window.textbox.append("3. Yrita ohjata punainen nelio vihreaan ruutuun.")
+        self.window.textbox.append("  W = liiku ylos")
+        self.window.textbox.append("  S = liiku alas")
+        self.window.textbox.append("  A = liiku vasemmalle")
+        self.window.textbox.append("  D = liiku oikealle")
+        self.window.textbox.append("4. Voit lopettaa ja saada esimerkkiratkaisun painamalla \" Luovuta ja anna ratkaisu\"-nappia.")
+        self.window.textbox.append("5. Labyrintin voi tallentaa painamalla \"Tallenna labyrintti\"-nappia")
+        self.window.textbox.append("6. \"Lopeta\"-nappi sammuttaa sovelluksen.")
+
         
     
     def pelaaKomento(self):
