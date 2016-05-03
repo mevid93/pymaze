@@ -9,6 +9,7 @@ from Labyrintti import *
 from Pala import *
 import PyQt4.QtGui
 
+
 class Tallentaja(object):
 
     def __init__(self, window, labyrintti):
