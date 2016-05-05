@@ -69,7 +69,7 @@ class NappienKuuntelija(object):
             
     def tietojaOhjelmastaKomento(self):
         self.window.textbox.clear()
-        self.window.textbox.setText("Labyrintti-peli V.0.2.6\n")
+        self.window.textbox.setText("Labyrintti-peli V.0.2.7\n")
         self.window.textbox.append("Ohjelma on tehty Aalto-yliopiston kurssin Ohjelmoinnin peruskurssi Y2 suorittamiseksi.")
         self.window.textbox.append("Ohjelman lahdekoodi on vapaasti saatavissa GitHubista.")
         self.window.textbox.append("GitHub:  https://github.com/mevid93/PythonY2Labyrintti.git")

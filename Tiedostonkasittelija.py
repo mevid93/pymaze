@@ -99,7 +99,7 @@ class Lataaja(object):
                 self.window.textbox.clear()
                 self.window.textbox.setText("Tiedostoa ei ole olemassa.")
             else:
-                jatka = self.__lueTiedostoRiviRivilta(file)
+                jatka = self.lueTiedostoRiviRivilta(file)
             file.close()
             #Tarkista etta kaikki tiedot on luettu
             if(jatka != True or self.checkTyyppi != True or self.checkLeveys != True or self.checkKorkeus != True or self.checkPalanLeveys != True or self.checkPalanKorkeus != True):
@@ -115,10 +115,10 @@ class Lataaja(object):
     
     
     
-    ''' Private-metodi, jolla luetaan tiedosto rivi rivilta. Lukemisen aikana merkitaan muistiin
+    ''' Metodi, jolla luetaan tiedosto rivi rivilta. Lukemisen aikana merkitaan muistiin
         etta tarvittavia tietoja on loydetty tiedostosta. '''
     
-    def __lueTiedostoRiviRivilta(self, file):
+    def lueTiedostoRiviRivilta(self, file):
         #lue tiedoston sisalto
         for line in file:
             osat = line.split(":")
@@ -130,7 +130,6 @@ class Lataaja(object):
                     if(self.tyyppi != "WeaveLabyrintti" and self.tyyppi != "KaksiDLabyrintti"):
                         self.window.textbox.clear()
                         self.window.textbox.setText("Labyrintin Tyyppi ei ole tuettu!")
-                        file.close()
                         return False
                     self.checkTyyppi = True
                 elif(osat[0] == "#Labyrintin leveys"):
@@ -156,7 +155,7 @@ class Lataaja(object):
                 elif(osat[0] == "#Palat"):
                     self.checkPalat = True
                 #Tarkoittaa sita etta nyt luetaan palojen dataa. Palojen jarjestyksella ei valia.
-                elif(self.checkPalat == True and self.checkPalanLeveys == True and self.checkPalanKorkeus == True):                     
+                elif(self.checkPalat == True and self.checkPalanLeveys == True and self.checkPalanKorkeus == True):                    
                     palatyyppi = osat[1]
                     if(palatyyppi in self.palojenTyypit):
                         koordinaatit = osat[0].split(" ")
@@ -167,7 +166,7 @@ class Lataaja(object):
                             koordinaatit[1] = koordinaatit[1].strip()
                             x = self.__stringToInt(koordinaatit[0])
                             y = self.__stringToInt(koordinaatit[1])
-                            if(x == -1 or y == -1 ):
+                            if(x == -1 or y == -1 or x < 275 or x > 775 or y < 25 or y > 525):
                                 self.window.textbox.clear()
                                 self.window.textbox.setText("Labyrintti sisaltaa virheellisen palan.")
                                 return False
@@ -176,10 +175,12 @@ class Lataaja(object):
                         else:
                             self.window.textbox.clear()
                             self.window.textbox.setText("Labyrintti sisaltaa virheellisen palan.")
+                            return False
                     else:
                         self.window.textbox.clear()
                         self.window.textbox.setText("Labyrintti sisaltaa virheellisen palan.")
-                        return False   
+                        return False 
+                
             else:
                 continue
         #Jos paasty tanne niin labyrintti tiedoston rivit eivat olleet virheellisia 

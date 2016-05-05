@@ -2,7 +2,7 @@
 Created on 4 Mar 2016
 
 @author: Martin Vidjeskog
-@version: 0.2.6
+@version: 0.2.7
 
 HUOM!!!!!
  Ohjelman suorittaminen vaatii pythonin asentamista.
