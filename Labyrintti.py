@@ -9,8 +9,8 @@ Created on 5 Mar 2016
 '''
 
 
-from Luontialgoritmi1 import luo2Dlabyrintti 
-import Luontialgoritmi2
+from Luontialgoritmi1 import Luo2Dlabyrintti 
+from Luontialgoritmi2 import LuoWeaveLabyrintti
 
 
 ''' Labyrintti luokka on abstrakti ylaluokka, jonka muut labyrintin tyypit perivat '''
@@ -103,7 +103,7 @@ class KaksiDLabyrintti(Labyrintti):
     ''' Metodi, joka kutsuu luontialgoritmia ja asettaa luodun labyrintin olion atribuutiksi '''
         
     def luoLabyrintti(self):
-        luoja = luo2Dlabyrintti(self.leveys, self.korkeus)
+        luoja = Luo2Dlabyrintti(self.leveys, self.korkeus)
         self.lista = luoja.suoritaLabyrintinLuonti()
     
     
@@ -137,7 +137,8 @@ class WeaveLabyrintti(Labyrintti):
     ''' Metodi, joka kutsuu luontialgoritmia ja asettaa luodun labyrintin olion atribuutiksi '''
      
     def luoLabyrintti(self):
-        self.lista = Luontialgoritmi2.luoWeaveLabyrintti(self.leveys, self.korkeus)
+        luoja = LuoWeaveLabyrintti(self.leveys, self.korkeus)
+        self.lista = luoja.suoritaLabyrintinLuonti()
         
         
         

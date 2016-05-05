@@ -3,9 +3,8 @@ Created on 5 Mar 2016
 
 @author: Martin Vidjeskog
 
- Tama luokka sisaltaa 2D labyrinttien luomiseksi suunnitellun algoritmin.
- Algoritmi perustuu Recursive Backtrack-algoritmiin. Toteutuksessa on
- parantamisen varaa, mutta se toimii.
+ Tama luokka sisaltaa 2D-labyrinttien luomiseksi suunnitellun algoritmin.
+ Algoritmi perustuu "Recursive Backtrack"-algoritmiin. 
  
 '''
 
@@ -13,7 +12,7 @@ Created on 5 Mar 2016
 import random 
 from Pala import *
  
-class luo2Dlabyrintti(object):
+class Luo2Dlabyrintti(object):
     
     ''' Konstruktori, joka saa parametreina labyrintin leveyden ja korkeuden. 
         Konstrukotirssa maaritellaan myos muuttuja, joita tarvitaan palan kuvaamiseen (sijainti ja koko) '''
