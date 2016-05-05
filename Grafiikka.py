@@ -97,8 +97,7 @@ class Kayttoliittyma(QtGui.QWidget):
         self.exitButton.resize(200, 50)
         self.exitButton.move(50, 476)
         
-        ''' labyrintin generointiin liittyva asetusvalikon
-            asetusvalikon alustaminen. '''
+        ''' labyrintin generointiin liittyva asetusvalikon alustaminen. '''
         
         ''' valikon ensimmainen iso otsikko '''
         font = QtGui.QFont()

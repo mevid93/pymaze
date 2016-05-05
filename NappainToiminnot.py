@@ -2,6 +2,12 @@
 Created on 2 May 2016
 
 @author: Marski
+
+ Luokka, joka sisaltaa komennot, jotka suoritetaan kun nappaimia painetaa. 
+ (Pelaajan liikuttamiseen suunniteltu pelilogiikka). Pelaajan liikuttaminen
+ on mahdollista vain pelitilassa, jolloin pelaaja on piirrettyna kayttoliittymassa
+ olevaan labyrinttiin. 
+
 '''
 
 
@@ -9,15 +15,18 @@ from PyQt4 import QtCore
 
 
 class NappainKuuntelija(object):
+    
     '''
-    Luokka, joka sisaltaa komennot, jotka suoritetaan kun nappaimia painetaa. 
-    (Pelaajan liikuttamiseen suunniteltu logiikka).
+    Konstruktori, joka saa parametrina kayttoliittyman ikkunan.
     '''
 
     def __init__(self, window):
         self.window = window
     
     
+    
+    ''' Meotodi, joka selvittaa mita nappainta on painettu ja kutsuu sen perusteella liikuttamista
+        varten suunniteltuja metodeja.'''
     
     def suoritaNappaimenToiminto(self, e):
         x, y = self.window.hahmo.getSijainti()
@@ -34,7 +43,9 @@ class NappainKuuntelija(object):
         if(type(self.window.labyrintti.getPala(x,y)).__name__ == "MaaliPala"):
             self.maaliKomento()  
     
-    
+
+
+    ''' Metodi, joka liikuttaa pelaajaa labyrintissa ylospain, mikali siirtyma on sallittu. '''
     
     def liikuYlosKomento(self, x, y, liikuta):
         if(y > 0 and self.window.labyrintti.getPala(x, y).voiLiikkuaYlos()):
@@ -47,6 +58,8 @@ class NappainKuuntelija(object):
 
 
 
+    ''' Metodi, joka liikuttaa pelaajaa alaspain, mikali siirtyma on sallittu. '''
+
     def liikuAlasKomento(self, x, y, liikuta):
         if(y < self.window.labyrintti.getKorkeus()-1 and self.window.labyrintti.getPala(x, y).voiLiikkuaAlas()):
             while(type(self.window.labyrintti.getPala(x, y+liikuta)).__name__ == "YlikulkuVaakasuuntaPala"):
@@ -57,6 +70,8 @@ class NappainKuuntelija(object):
             self.window.update()
     
     
+    
+    ''' Metodi, joka liikuttaa pelaajaa vasemmalle, mikali siirtyma on sallittu. '''
     
     def liikuVasemmalleKomento(self, x, y, liikuta):
         if(x > 0 and self.window.labyrintti.getPala(x, y).voiLiikkuaVasemmalle()):
@@ -69,6 +84,8 @@ class NappainKuuntelija(object):
 
 
 
+    ''' Metodi, joka liikuttaa pelaajaa oikealle, mikali siirtyma on sallittu. '''
+
     def liikuOikealleKomento(self, x, y, liikuta):
         if(x < self.window.labyrintti.getLeveys()-1 and self.window.labyrintti.getPala(x, y).voiLiikkuaOikealle()):
             while(type(self.window.labyrintti.getPala(x+liikuta, y)).__name__ == "YlikulkuPystysuuntaPala"):
@@ -79,6 +96,8 @@ class NappainKuuntelija(object):
             self.window.update()
 
 
+
+    ''' Metodi, joka suoritetaan kun pelaaja saavuttaa maaliruudun. Pelitila vaihtuu pois jne. '''
 
     def maaliKomento(self):
         self.window.tila = 1

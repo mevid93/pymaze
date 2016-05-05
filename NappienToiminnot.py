@@ -2,6 +2,13 @@
 Created on 2 May 2016
 
 @author: Marski
+
+ Luokka, joka sisaltaa kayttoliittyman nappien toimintalogiikan.
+ Jokaiselle komennolle on oma metodi, jota kutstuaan aina kun nappia painetaan.
+ Nappeja ei voi kuitenkaan aina painaa, vaan toiminnon suorittaminen riippuu myos 
+ ohjelman tilasta. Esim. Pelitilassa labyrinttia ei voi tallentaa ennen kuin peli 
+ on pelattu loppuun, tai on painettu luovutus nappia.
+    
 '''
 
 
@@ -15,14 +22,17 @@ from Ratkaisualgoritmi1 import WallFollower
 
 
 class NappienKuuntelija(object):
+    
     '''
-    Luokka, joka sisaltaa komennot, jotka suoritetaan kun nappeja painetaan.
+    Konstruktori, joka saa parametrina kayttoliittyma-ikkunan. 
     '''
 
     def __init__(self, window):
         self.window = window
              
-        
+    
+    
+    ''' Metodi joka tunnistaa mita nappia on painettu ja kutsuu sen perusteella komento-metodeja '''    
         
     def suoritaNapinToiminnot(self, sender):
         if(sender.text() == "Generoi Labyrintti" and self.window.tila != 2):
@@ -44,6 +54,8 @@ class NappienKuuntelija(object):
 
 
 
+    ''' Metodi, joka asettaa labyrintin generointiin liittyvan asetusalikon nakyville '''
+
     def generoiLabyrinttiKomento(self):
         self.window.tila = 0
         self.window.labyrintti = None
@@ -51,7 +63,9 @@ class NappienKuuntelija(object):
         if not(self.window.label1.isVisible()):
             self.window.asetusvalikko()
                     
-                    
+    
+    
+    ''' Metodi, joka asettaa tekstikentan sisalloksi pelin tiedot ja ohjeet '''
             
     def tietojaOhjelmastaKomento(self):
         self.window.textbox.clear()
@@ -73,7 +87,10 @@ class NappienKuuntelija(object):
         self.window.textbox.append("5. Labyrintin voi tallentaa painamalla \"Tallenna labyrintti\"-nappia")
         self.window.textbox.append("6. \"Lopeta\"-nappi sammuttaa sovelluksen.")
 
-        
+
+
+    ''' Metodi, joka kaynnistaa pelitilan. Hahmo asetetaan labyrintin keskelle, tekstikentan teksi vaihdetaan ja hahmon liikuttaminen 
+        nappaimiston syotteilla on mahdollista. '''
     
     def pelaaKomento(self):
         self.window.tila = 2
@@ -84,13 +101,17 @@ class NappienKuuntelija(object):
         self.window.textbox.setText("PELI ON KAYNNISSA! Etsi reitti ulos labyrintista.\nVoit aina luovuttaa jos et keksi ratkaisua.")
         self.window.update()    
         
-        
+    
+    
+    ''' Metodi, jonka avulla kutsutaan save-file valikko. Labyrintti voidaan tallentaa .maze-tiedostoon. '''    
         
     def tallennaLabyrinttiKomento(self):
         tallentaja = Tallentaja(self.window, self.window.labyrintti)
         tallentaja.tallennaLabyrintti()
         
-        
+    
+    
+    ''' Metodi, jonka avulla kutsutaan open-file dialog. Labyrintti voidaan ladata .maze-tiedostosta. '''
         
     def lataaLabyrinttiKomento(self):
         lataaja = Lataaja(self.window)
@@ -104,7 +125,9 @@ class NappienKuuntelija(object):
             self.window.textbox.clear()
             self.window.textbox.setText("Labyrintin lataus onnistui.")
         
-        
+    
+    
+    ''' Metodi, jonka avulla peli voidaan luovuttaa ja samalla esitetaan demoratkaisu. '''    
         
     def luovutusKomento(self):    
         self.window.tila = 1
@@ -117,6 +140,8 @@ class NappienKuuntelija(object):
         self.window.textbox.setText("Luovutit. Tassa esimerkkiratkaisu.")
     
     
+    
+    ''' Asetuvalikon generoi-napppiin liitttyva metodi, jota painettaessa labyrintti luodaan ja asetetaan nakyviin'''
     
     def generoiKomento(self):
         leveys = self.window.leveysBox.value()
