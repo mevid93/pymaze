@@ -3,7 +3,7 @@ Created on 4 Mar 2016
 
 @author: Martin Vidjeskog
 
- SuperPala (muiden palojen ylaluokka) ja muut 18 erilaista pala luokkaa. Jokainen pala tietaa 
+ SuperPala (muiden palojen ylaluokka) ja muut 18 erilaista pala-luokkaa. Jokainen pala tietaa 
  sijaintinsa ja kokonsa (pikseleina). Lisaksi osaavat piirtaa itsensa ja palauttaa tiedot
  siita mihin suuntiin palasta voi liikkua. 
  
@@ -109,7 +109,7 @@ class SuperPala(object):
 
 
 
-""" Alaluoka alkavat tasta eteenpain. Jokaiseen luokkaan on pyritty 
+""" Alaluokat alkavat tasta. Jokaiseen luokkaan on pyritty 
     hahmottelemaan minka tyyppinen pala on kyseessa. """
 
         

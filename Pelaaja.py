@@ -3,7 +3,7 @@ Created on 12 Mar 2016
 
 @author: Martin Vidjeskog
 
- Tama luokka kuvaa pelaajaa. (punainen nelio). Luokka
+ Tama luokka kuvaa pelaajaa (punainen nelio). Luokka
  piirtaa ja tietaa pelaajan paikan labyrintissa.
  Saa parametreina kokonaisluvut x ja y, jotka kuvaavat pelaajan 
  paikkaa 2-dimensioisessa labyrintti taulukossa.

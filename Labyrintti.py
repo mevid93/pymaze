@@ -9,7 +9,7 @@ Created on 5 Mar 2016
 '''
 
 
-import Luontialgoritmi1
+from Luontialgoritmi1 import luo2Dlabyrintti 
 import Luontialgoritmi2
 
 
@@ -103,7 +103,8 @@ class KaksiDLabyrintti(Labyrintti):
     ''' Metodi, joka kutsuu luontialgoritmia ja asettaa luodun labyrintin olion atribuutiksi '''
         
     def luoLabyrintti(self):
-        self.lista = Luontialgoritmi1.luo2Dlabyrintti(self.leveys, self.korkeus)
+        luoja = luo2Dlabyrintti(self.leveys, self.korkeus)
+        self.lista = luoja.suoritaLabyrintinLuonti()
     
     
     
