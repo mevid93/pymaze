@@ -133,7 +133,7 @@ class NappienKuuntelija(object):
         self.window.tila = 1
         self.window.update()
         self.window.tila = 3
-        self.window.demo = WallFollower(self.window, self.window.labyrintti)
+        self.window.demo = WallFollower(self.window)
         self.window.demo.selvitaReitti()
         self.window.update()
         self.window.textbox.clear()
