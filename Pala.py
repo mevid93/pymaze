@@ -2,6 +2,14 @@
 Created on 4 Mar 2016
 
 @author: Martin Vidjeskog
+
+ SuperPala (muiden palojen ylaluokka) ja muut 18 erilaista pala luokkaa. Jokainen pala tietaa 
+ sijaintinsa ja kokonsa (pikseleina). Lisaksi osaavat piirtaa itsensa ja palauttaa tiedot
+ siita mihin suuntiin palasta voi liikkua. 
+ 
+HUOM!
+ Jokaisella luokalla on samat metodit, joten niiden toiminta on selitetty vain superluokassa.
+
 '''
 
 
@@ -9,50 +17,100 @@ from PyQt4 import QtGui, QtCore
 
 
 class SuperPala(object):
+    
     '''
-    Superluokka, jonka muut palat (alaluokkat) perivat
-    '''   
+    Konstruktori, joka saa parametreina palan vasemman ylareunan sijainnin naytolla (x,y),
+    seka leveyden ja korkeuden w, h. '''
+       
     def __init__(self, x, y , w, h):
         self.x = x
         self.y = y
         self.w = w
         self.h = h
+ 
     
-    def setLocation(self, x, y):
-        self.x = x
-        self.y = y
-        
+    
+    ''' Metodi, joka palatuttaa palan sijainnin (pikseleina) x-akselilla '''
+    
     def getX(self):
         return self.x
+    
+    
+    
+    ''' Metodi, joka palauttaa palan sijainnin (pikseleina) y-akselilla. Huom! Kaanteinen y-akseli '''
+    
+    def getY(self):
+        return self.y
+    
+    
+    
+    ''' Metodi, joka palauttaa palan leveyden pikseleina '''
+    
+    def getW(self):
+        return self.w
+    
+    
+    
+    ''' Metodi, joka palauttaa palan korkeuden pikseleina '''
+    
+    def getH(self):
+        return self.h     
+    
+    
+    
+    ''' Metodi, joka palauttaa palan keskipisteen (pikseleina) '''
     
     def getKeskipiste(self):
         x = self.x + self.w/2;
         y = self.y + self.h/2;
         return x, y
     
+    
+    
+    ''' Metodi, joka palauttaa tiedon voiko palasta liikkua ylos. Toteutus
+        on jatetty alaluokkille. '''
+    
     def voiLiikkuaYlos(self):
         pass
+    
+    
+    
+    ''' Metodi, joka palauttaa tiedon voiko palasta liikkua alas. Toteutus
+        on jatetty alaluokille. '''
     
     def voiLiikkuaAlas(self):
         pass
     
+    
+    
+    ''' Metodi, joka palauttaa tiedon voiko palasta liikkua oikealle. Toteutus
+        on jatetty alaluokille. '''
+    
     def voiLiikkuaOikealle(self):
         pass
     
+    
+    
+    ''' Metodi, joka palauttaa tiedon voiko palasta liikkua vasemmalle. Toteutus
+        on jatetty alaluokille. '''
+    
     def voiLiikkuaVasemmalle(self):
         pass
+       
     
-    def getY(self):
-        return self.y
     
-    def getW(self):
-        return self.w
-    
-    def getH(self):
-        return self.h            
+    ''' Metodi, joka piirtaa palan kayttoliittymaan. Toteutus jatetty alaluokille. '''
         
     def paintPala(self):
         pass
+
+
+
+
+
+
+""" Alaluoka alkavat tasta eteenpain. Jokaiseen luokkaan on pyritty 
+    hahmottelemaan minka tyyppinen pala on kyseessa. """
 
         
      
