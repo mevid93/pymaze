@@ -1,6 +1,6 @@
-# PythonLabyrintti
+# Pymaze
 
-Python course project work
+Python maze game.
 
 ![screenshot](./images/maze_example.png)
 
