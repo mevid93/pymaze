@@ -1,6 +1,6 @@
 # Pymaze
 
-Python maze game.
+Python maze game. PyQt5 application.
 
-![screenshot](./images/maze_example.png)
+![screenshot](./images/screenshot.png)
 

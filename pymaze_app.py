@@ -1,20 +1,20 @@
-'''
+"""
 Created on 4 Mar 2016
 
 @author: Martin Vidjeskog
-@version: 0.3.0
-'''
+@version: 0.3.1
+"""
 
 
 import sys
-from PyQt5 import QtGui, QtWidgets
-from src.window import GameWindow
+from PyQt5 import QtWidgets
+
+from pymaze.gui.game_window import GameWindow
 
 
-if __name__ == '__main__':
-    '''Main function to start the program.'''
+if __name__ == "__main__":
     sys.setrecursionlimit(2000)
     app = QtWidgets.QApplication(sys.argv)
     window = GameWindow()
-    window.showWindow()
+    window.show_window()
     sys.exit(app.exec_())
