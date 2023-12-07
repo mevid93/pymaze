@@ -1,4 +1,4 @@
-# Pymaze
+# PyMaze
 
 Python maze game. PyQt5 application.
 
